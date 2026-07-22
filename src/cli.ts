@@ -228,6 +228,7 @@ function printTestPlanSummary(testPlan: TestPlan): void {
   console.log(chalk.blue(`     🔧 Functional:    ${testPlan.summary.byCategory.functional}`));
   console.log(chalk.magenta(`     📏 Boundary:      ${testPlan.summary.byCategory.boundary}`));
   console.log(chalk.cyan(`     🛡 Error Handling: ${testPlan.summary.byCategory.error_handling}`));
+  console.log(chalk.white(`     🌐 API Tests:     ${testPlan.summary.byCategory.api}`));
   console.log(chalk.bold('\n  By Priority:'));
   console.log(chalk.red(`     Critical: ${testPlan.summary.byPriority.critical}`));
   console.log(chalk.yellow(`     High:     ${testPlan.summary.byPriority.high}`));

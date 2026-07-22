@@ -1,0 +1,27 @@
+# Feature: User Management API
+
+## Acceptance Criteria
+
+Given an authenticated admin user
+When they send a POST request to /api/v1/users with valid user data
+Then a new user should be created and a 201 response returned with the user object
+
+Given an authenticated user
+When they send a GET request to /api/v1/users/{id} with a valid user ID
+Then the API should return a 200 response with the user's profile data
+
+Given an authenticated admin user
+When they send a PUT request to /api/v1/users/{id} with updated user fields
+Then all user fields should be replaced and a 200 response returned
+
+Given an authenticated user
+When they send a PATCH request to /api/v1/users/{id} with partial data
+Then only the specified fields should be updated and a 200 response returned
+
+Given an authenticated admin user
+When they send a DELETE request to /api/v1/users/{id}
+Then the user should be soft-deleted and a 204 response returned
+
+Given an unauthenticated request
+When any HTTP method is sent to /api/v1/users without a valid Bearer token
+Then the API should return a 401 Unauthorized response with no data leakage

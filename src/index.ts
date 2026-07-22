@@ -7,6 +7,7 @@
 
 export { AcceptanceCriteriaParser } from './parser';
 export { TestCaseGenerator } from './generator';
+export { ApiTestGenerator } from './generator';
 export { XrayClient } from './xray';
 export { loadConfig, validateConfig } from './config';
 export * from './types';

@@ -8,6 +8,7 @@ import {
   TestScenario,
   TestStep,
 } from '../types';
+import { ApiTestGenerator } from './apiTestGenerator';
 
 /**
  * Generates a unique ID for test artifacts
@@ -20,9 +21,11 @@ function generateId(prefix: string): string {
  * TestCaseGenerator
  *
  * Generates comprehensive test cases from parsed acceptance criteria.
- * Produces positive, negative, edge case, boundary, and functional tests.
+ * Produces positive, negative, edge case, boundary, functional, and API tests.
  */
 export class TestCaseGenerator {
+  private apiGenerator = new ApiTestGenerator();
+
   /**
    * Generate a full test plan from parsed acceptance criteria
    */
@@ -38,6 +41,10 @@ export class TestCaseGenerator {
       scenarios.push(this.generateBoundaryScenario(criterion));
       scenarios.push(this.generateErrorHandlingScenario(criterion));
     }
+
+    // Generate API-specific test scenarios
+    const apiScenarios = this.apiGenerator.generateApiScenarios(parsed);
+    scenarios.push(...apiScenarios);
 
     // Filter out empty scenarios
     const validScenarios = scenarios.filter(s => s.testCases.length > 0);
@@ -669,6 +676,7 @@ export class TestCaseGenerator {
       error_handling: 0,
       security: 0,
       performance: 0,
+      api: 0,
     };
 
     const byPriority: Record<TestPriority, number> = {

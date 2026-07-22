@@ -39,7 +39,39 @@ export type TestCategory =
   | 'boundary'
   | 'error_handling'
   | 'security'
-  | 'performance';
+  | 'performance'
+  | 'api';
+
+/**
+ * HTTP method types for API tests
+ */
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS';
+
+/**
+ * Represents a parsed API endpoint from acceptance criteria
+ */
+export interface ApiEndpoint {
+  method: HttpMethod;
+  path: string;
+  description: string;
+  requestBody?: string;
+  responseCode?: number;
+  authentication?: string;
+}
+
+/**
+ * API-specific test case with request/response details
+ */
+export interface ApiTestCase extends TestCase {
+  apiDetails?: {
+    method: HttpMethod;
+    endpoint: string;
+    headers: Record<string, string>;
+    requestBody?: object | string;
+    expectedStatusCode: number;
+    expectedResponseSchema?: string;
+  };
+}
 
 /**
  * Test priority levels
