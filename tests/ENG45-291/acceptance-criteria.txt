@@ -1,0 +1,23 @@
+# ENG45-291: A11y - No Main Landmark and page content not in landmarks
+
+## Acceptance Criteria
+
+Given a user navigating with a screen reader
+When they open any course page (e.g., D353)
+Then the page should have an HTML <main> element or ARIA role="main" wrapping the primary content
+
+Given the page content structure
+When assistive technology scans for landmarks
+Then all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)
+
+Given the OEX course pages with heading elements
+When the h1 element "OEX Native Problem Types" is rendered
+Then it should be contained within a <main> landmark region
+
+Given any course page
+When the sr-only h2 heading is rendered for screen readers
+Then it should be inside a landmark region, not floating outside document structure
+
+Given the text-right div with metadata content
+When the page renders the small text "py-1" section
+Then it should be nested inside the <main> landmark, not outside all landmarks

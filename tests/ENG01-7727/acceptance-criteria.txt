@@ -1,0 +1,23 @@
+# ENG01-7727: ECS to EKS Migration - FacultySupport-FieldExperienceHealthAPI
+
+## Acceptance Criteria
+
+Given the FacultySupport-FieldExperienceHealthAPI repository
+When the argodeploy/ folder is configured
+Then it should contain valid pipelineConfig.json, dockerBuild.json, postman.json, and environment manifests
+
+Given the ArgoCD pipeline is configured
+When a deployment is triggered to SIT environment
+Then the pipeline should deploy successfully and pods should reach Running state
+
+Given the ArgoCD pipeline deploys to SIT and STAGE
+When health check endpoints are called on EKS pods
+Then all health checks should pass in all deployed environments
+
+Given the PROD deployment via ArgoCD
+When the pod is running with no live traffic
+Then the API Gateway should be updated to point to the EKS load balancer for traffic cutover
+
+Given the successful PROD traffic cutover is validated
+When the monitoring period confirms stability
+Then ECS tasks should be scaled to 0 and monitoring/alerting configured for EKS deployment
