@@ -1,0 +1,12 @@
+# Feature: Shopping Cart
+
+## Acceptance Criteria
+
+1. Users can add products to their shopping cart from the product detail page
+2. The cart icon should display the total number of items currently in the cart
+3. Users should be able to update the quantity of items in the cart (minimum 1, maximum 99)
+4. When a user removes all items from the cart, a "Your cart is empty" message should be displayed with a "Continue Shopping" button
+5. The cart should persist across browser sessions for logged-in users
+6. Cart totals should update in real-time when quantities are changed
+7. Out-of-stock items should not be addable to the cart
+8. Users should see the estimated shipping cost before proceeding to checkout

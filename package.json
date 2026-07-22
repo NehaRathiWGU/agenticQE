@@ -1,0 +1,45 @@
+{
+  "name": "xray-test-generator",
+  "version": "1.0.0",
+  "description": "Generate comprehensive test cases, scenarios, and test plans for Jira Xray from acceptance criteria",
+  "main": "dist/index.js",
+  "bin": {
+    "xray-testgen": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "dev": "ts-node src/cli.ts",
+    "lint": "eslint src/**/*.ts",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "jira",
+    "xray",
+    "test-cases",
+    "test-generation",
+    "qa",
+    "acceptance-criteria",
+    "testing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.0",
+    "chalk": "^4.1.2",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.0",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1",
+    "yaml": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0",
+    "ts-node": "^10.9.2",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0"
+  }
+}

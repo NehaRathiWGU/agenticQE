@@ -1,0 +1,23 @@
+# Feature: Payment Processing
+
+## Acceptance Criteria
+
+Given a user at checkout with items in their cart
+When they select credit card payment and enter valid card details
+Then the payment should be processed and an order confirmation displayed
+
+Given a user attempting payment
+When the payment gateway returns a decline
+Then the user should see "Payment declined. Please try another payment method." and no order should be created
+
+Given a user completing a successful payment
+When the order is confirmed
+Then they should receive an email confirmation with order number, items purchased, and estimated delivery date
+
+Given a user with a saved payment method
+When they select "Pay with saved card" and confirm
+Then the transaction should process using the tokenized card without re-entering details
+
+Given a payment in progress
+When the user's session times out or network disconnects
+Then no duplicate charges should occur and the user should be able to retry

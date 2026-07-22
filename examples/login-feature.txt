@@ -1,0 +1,23 @@
+# Feature: User Login
+
+## Acceptance Criteria
+
+Given a registered user with valid credentials
+When they enter their email and password on the login page and click "Sign In"
+Then they should be redirected to the dashboard with a welcome message
+
+Given a user with an inactive/locked account
+When they attempt to log in with correct credentials
+Then they should see an error message "Your account has been locked. Please contact support."
+
+Given a user on the login page
+When they enter an invalid email format
+Then the system should show inline validation error "Please enter a valid email address"
+
+Given a user who has forgotten their password
+When they click "Forgot Password" and enter their registered email
+Then they should receive a password reset email within 2 minutes
+
+Given a user with valid credentials
+When they fail to log in 5 consecutive times
+Then their account should be temporarily locked for 30 minutes
