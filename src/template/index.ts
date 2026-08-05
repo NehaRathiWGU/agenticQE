@@ -1,0 +1,1 @@
+export { TemplateSystem, templateSystem } from './system';

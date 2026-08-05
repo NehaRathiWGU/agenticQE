@@ -8,7 +8,8 @@ import ora from 'ora';
 import { AcceptanceCriteriaParser } from './parser';
 import { TestCaseGenerator } from './generator';
 import { XrayClient } from './xray';
-import { loadConfig, validateConfig } from './config';
+import { TemplateSystem } from './template';
+import { loadConfig, validateConfig, listProjects, loadProjectConfig } from './config';
 import { TestPlan } from './types';
 
 const program = new Command();
@@ -27,6 +28,9 @@ program
   .description('Generate test cases from acceptance criteria')
   .option('-f, --file <path>', 'Path to a file containing acceptance criteria')
   .option('-t, --text <text>', 'Acceptance criteria as direct text input')
+  .option('-k, --jira-key <key>', 'Jira issue key to fetch acceptance criteria from')
+  .option('-p, --project <name>', 'Project name to use (loads project-specific config)')
+  .option('-m, --template <name>', 'Template name to use (e.g., api-testing, ui-testing, migration, security)')
   .option('-n, --name <name>', 'Name/title for the test plan', 'Generated Test Plan')
   .option('-o, --output <path>', 'Output file path for generated tests (JSON)')
   .option('--push', 'Push generated tests to Jira Xray', false)
@@ -35,6 +39,13 @@ program
   .action(async (options) => {
     try {
       console.log(chalk.bold.blue('\n🧪 Xray Test Generator\n'));
+
+      // Determine input source
+      if (options.jiraKey) {
+        // Jira ingestion mode
+        await generateFromJira(options);
+        return;
+      }
 
       // Get input text
       let inputText: string;
@@ -50,7 +61,7 @@ program
       } else if (options.text) {
         inputText = options.text;
       } else {
-        console.error(chalk.red('Please provide input via --file or --text'));
+        console.error(chalk.red('Please provide input via --file, --text, or --jira-key'));
         program.help();
         return;
       }
@@ -99,6 +110,78 @@ program
       process.exit(1);
     }
   });
+
+// ================================================================
+// JIRA INGESTION MODE
+// ================================================================
+
+async function generateFromJira(options: any): Promise<void> {
+  const config = loadConfig();
+  const errors = validateConfig(config);
+
+  if (errors.length > 0) {
+    console.log(chalk.red('\n  Cannot fetch from Jira - configuration errors:'));
+    errors.forEach(e => console.log(chalk.red(`    ✗ ${e}`)));
+    console.log(chalk.gray('\n  Copy .env.example to .env and fill in your values.'));
+    process.exit(1);
+  }
+
+  // Load project-specific config if specified
+  let projectConfig = null;
+  if (options.project) {
+    projectConfig = loadProjectConfig(options.project);
+    if (!projectConfig) {
+      console.log(chalk.red(`\n  Project configuration not found: ${options.project}`));
+      console.log(chalk.gray(`  Available projects: ${listProjects().join(', ')}`));
+      process.exit(1);
+    }
+    console.log(chalk.gray(`  Using project: ${projectConfig.name} (${projectConfig.key})`));
+  }
+
+  const xray = new XrayClient(config);
+
+  const spinner = ora(`Fetching Jira issue ${options.jiraKey}...`).start();
+  let parsed: any;
+
+  try {
+    parsed = await xray.fetchStoryCriteria(options.jiraKey);
+    spinner.succeed(`Fetched ${parsed.criteria.length} acceptance criteria`);
+  } catch (error: any) {
+    spinner.fail(`Failed to fetch Jira issue: ${error.message}`);
+    process.exit(1);
+  }
+
+  console.log(chalk.gray(`  Source: ${config.jira.baseUrl}/browse/${options.jiraKey}`));
+  console.log(chalk.gray(`  Title: ${parsed.title}`));
+
+  // Step 2: Generate test cases
+  const genSpinner = ora('Generating test cases...').start();
+  const generator = new TestCaseGenerator();
+  const testPlan = generator.generateTestPlan(parsed);
+  genSpinner.succeed(`Generated ${testPlan.summary.totalTestCases} test cases in ${testPlan.summary.totalScenarios} scenarios`);
+
+  // Print summary
+  printTestPlanSummary(testPlan);
+
+  // Step 3: Output results
+  if (options.output) {
+    const outputPath = path.resolve(options.output);
+    fs.writeFileSync(outputPath, JSON.stringify(testPlan, null, 2), 'utf-8');
+    console.log(chalk.green(`\n✓ Test plan saved to: ${outputPath}`));
+  } else {
+    // Default output to ./generated-tests.json
+    const defaultOutput = path.resolve('./generated-tests.json');
+    fs.writeFileSync(defaultOutput, JSON.stringify(testPlan, null, 2), 'utf-8');
+    console.log(chalk.green(`\n✓ Test plan saved to: ${defaultOutput}`));
+  }
+
+  // Step 4: Push to Xray (if requested)
+  if (options.push) {
+    await pushToXray(testPlan, options.link);
+  }
+
+  console.log(chalk.bold.green('\n✅ Done!\n'));
+}
 
 // ================================================================
 // VALIDATE COMMAND - Validate Jira/Xray connection

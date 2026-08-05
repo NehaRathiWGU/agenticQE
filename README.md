@@ -8,6 +8,7 @@ Generate comprehensive test cases, test scenarios, and test plans for **Jira Xra
 - 🔧 **Functional tests** — End-to-end flows, state transitions
 - 📏 **Boundary tests** — Min/max values, timeouts, rate limits
 - 🛡 **Error handling tests** — Network failures, dependency outages
+- 🌐 **API tests** — REST/GraphQL endpoints, authentication, security
 
 ## Quick Start
 
@@ -27,6 +28,9 @@ npx xray-testgen generate --file examples/login-feature.txt --name "Login Featur
 
 # From direct text
 npx xray-testgen generate --text "Given a user... When they... Then the system..."
+
+# From Jira issue (fetches acceptance criteria directly)
+npx xray-testgen generate --jira-key PROJ-123
 
 # Preview without saving
 npx xray-testgen preview --file examples/shopping-cart.txt
@@ -48,6 +52,70 @@ npx xray-testgen generate --file examples/login-feature.txt --name "Login Tests"
 # Generate, push, and link to a Jira story
 npx xray-testgen generate --file examples/login-feature.txt --push --link PROJ-123
 ```
+
+## Multi-Project Support
+
+The tool supports multiple projects with project-specific configurations.
+
+### Creating a Project Configuration
+
+Create `projects/<project-name>/config.json`:
+
+```json
+{
+  "name": "Project Name",
+  "key": "myproject",
+  "jira": {
+    "projectKey": "MYPROJ",
+    "acceptanceCriteriaField": "customfield_12345"
+  },
+  "templates": {
+    "default": "templates/default.md",
+    "api-testing": "templates/api-testing.md",
+    "ui-testing": "templates/ui-testing.md",
+    "migration": "templates/migration.md",
+    "security": "templates/security.md"
+  },
+  "fieldMappings": {
+    "priority": {
+      "critical": "Highest",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "categoryKeywords": {
+      "api": ["api", "endpoint", "rest", "graphql"],
+      "ui": ["ui", "frontend", "page", "button"],
+      "security": ["security", "auth", "permission"]
+    }
+  },
+  "environments": ["SIT", "STAGE", "PROD"],
+  "defaultEnvironment": "SIT"
+}
+```
+
+### Using Project Config
+
+```bash
+# Generate tests with project config
+npx xray-testgen generate --jira-key PROJ-123 --project myproject
+
+# Generate from Jira issue with project config
+npx xray-testgen generate --jira-key PROJ-123 --project myproject --push
+
+# Apply a specific template
+npx xray-testgen generate --jira-key PROJ-123 --project myproject --template api-testing
+```
+
+### Available Templates
+
+| Template | Purpose |
+|----------|---------|
+| `api-testing` | REST/GraphQL, authentication, error handling |
+| `ui-testing` | Forms, navigation, accessibility, responsive |
+| `migration` | ECS→EKS, legacy modernization, deployment |
+| `security` | OWASP patterns, auth, authorization |
+| `default` | Standard test generation |
 
 ## Input Formats
 
@@ -145,17 +213,44 @@ The tool generates a JSON test plan containing:
 |--------|-------------|
 | `-f, --file <path>` | Input file path |
 | `-t, --text <text>` | Direct text input |
+| `-k, --jira-key <key>` | Fetch acceptance criteria from Jira issue |
+| `-p, --project <name>` | Use project-specific configuration |
 | `-n, --name <name>` | Test plan name |
 | `-o, --output <path>` | Output JSON path |
 | `--push` | Push to Jira Xray |
 | `--link <key>` | Link tests to Jira issue |
+| `--categories <cats>` | Comma-separated test categories |
+
+## Getting Started for New Projects
+
+### Step 1: Configure Environment
+```bash
+cd xray-test-generator
+cp .env.example .env
+# Edit .env with your Jira/Xray credentials
+```
+
+### Step 2: Create Project Configuration
+Create `projects/myproject/config.json` with your project details (see Multi-Project Support section above).
+
+### Step 3: Create Templates (Optional)
+Add template files in `projects/myproject/templates/` for your project-specific patterns.
+
+### Step 4: Generate Tests
+```bash
+# From Jira issue
+npx xray-testgen generate --jira-key MYPROJ-123 --project myproject
+
+# From file
+npx xray-testgen generate --file acceptance.txt --project myproject
+```
 
 ## Architecture
 
 ```
 src/
 ├── cli.ts                    # CLI entry point (commander)
-├── config.ts                 # Environment config loader
+├── config.ts                 # Environment & project config loader
 ├── index.ts                  # Programmatic API exports
 ├── types/
 │   └── index.ts              # TypeScript interfaces
@@ -163,15 +258,34 @@ src/
 │   └── acceptanceCriteriaParser.ts  # AC text parser
 ├── generator/
 │   └── testCaseGenerator.ts  # Test case generation engine
+├── template/
+│   ├── index.ts              # Template module exports
+│   └── system.ts             # Template loading & application
 └── xray/
     └── xrayClient.ts         # Jira/Xray API integration
+
+projects/
+└── <project-name>/
+    ├── config.json           # Project-specific configuration
+    └── templates/
+        ├── migration.md      # Migration test template
+        ├── api-testing.md    # API testing template
+        ├── ui-testing.md     # UI testing template
+        └── security.md       # Security testing template
 ```
 
 ## Programmatic Usage
 
 ```typescript
-import { AcceptanceCriteriaParser, TestCaseGenerator, XrayClient } from 'xray-test-generator';
+import { 
+  AcceptanceCriteriaParser, 
+  TestCaseGenerator, 
+  XrayClient,
+  loadConfig,
+  TemplateSystem
+} from 'xray-test-generator';
 
+// Basic usage
 const parser = new AcceptanceCriteriaParser();
 const generator = new TestCaseGenerator();
 
@@ -185,6 +299,13 @@ const testPlan = generator.generateTestPlan(parsed);
 const xray = new XrayClient(config);
 await xray.authenticate();
 const result = await xray.createFullTestPlan(testPlan);
+
+// Using templates
+const templateSystem = new TemplateSystem();
+const enhanced = templateSystem.applyTemplate('myproject', 'api-testing', parsed);
+
+// Load project config
+const projectConfig = loadConfig('myproject');
 ```
 
 ## Test Categories Explained

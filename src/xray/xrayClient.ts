@@ -6,6 +6,8 @@ import {
   TestScenario,
   XrayCreationResult,
   XrayTestStep,
+  ParsedAcceptanceCriteria,
+  AcceptanceCriterion,
 } from '../types';
 
 /**
@@ -24,9 +26,9 @@ export class XrayClient {
   constructor(config: AppConfig) {
     this.config = config;
 
-    // Initialize Jira REST client
+    // Initialize Jira REST client (API v2 for better compatibility)
     this.jiraClient = axios.create({
-      baseURL: `${config.jira.baseUrl}/rest/api/3`,
+      baseURL: `${config.jira.baseUrl}/rest/api/2`,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Basic ${Buffer.from(
@@ -455,6 +457,251 @@ export class XrayClient {
    */
   private delay(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // ================================================================
+  // JIRA STORY INGESTION
+  // ================================================================
+
+  /**
+   * Fetch acceptance criteria from a Jira issue (Story/Task)
+   * Pulls issue description and custom field "acceptance criteria"
+   */
+  async fetchStoryCriteria(issueKey: string): Promise<ParsedAcceptanceCriteria> {
+    try {
+      // Fetch the issue with summary, description, and acceptance criteria field
+      const response = await this.jiraClient.get(`/issue/${issueKey}`, {
+        params: {
+          fields: 'summary,description,acceptance%20criteria,description',
+          expand: 'renderedFields',
+        },
+      });
+
+      const issue = response.data;
+      const fields = issue.fields;
+
+      // Extract summary and description
+      // API v2 returns plain text with Wiki Markup (e.g., h2., **bold**)
+      const summary = fields.summary || 'Untitled Story';
+      const description = (typeof fields.description === 'string' ? fields.description : '') || '';
+
+      // Try to extract acceptance criteria from custom field
+      // Try multiple possible field names for acceptance criteria
+      let acceptanceCriteriaText = '';
+
+      // Check for common custom field names (API v2 uses direct field IDs)
+      const possibleNames = [
+        'customfield_10195',  // The actual field ID for Acceptance Criteria at WGU
+        'acceptance criteria',
+        'Acceptance Criteria',
+        'acceptanceCriteria',
+        'acceptance_criteria',
+        'AcceptanceCriteria',
+        'customfield_acceptancecriteria',
+      ];
+
+      for (const fieldName of possibleNames) {
+        if (fields[fieldName]) {
+          acceptanceCriteriaText = fields[fieldName];
+          break;
+        }
+      }
+
+      // If custom field not found, try to extract from description
+      if (!acceptanceCriteriaText && description) {
+        acceptanceCriteriaText = this.extractAcceptanceCriteriaFromDescription(description);
+      }
+
+      // Parse the acceptance criteria
+      const criteria = this.parseJiraAcceptanceCriteria(acceptanceCriteriaText);
+
+      return {
+        title: summary,
+        description: description || `Acceptance criteria from Jira issue ${issueKey}`,
+        criteria: criteria,
+        metadata: {
+          source: 'jira-issue',
+          parsedAt: new Date().toISOString(),
+          totalCriteria: criteria.length,
+        },
+      };
+    } catch (error: any) {
+      const errorMsg = error.response?.data?.errorMessages
+        ? JSON.stringify(error.response.data.errorMessages)
+        : error.message;
+      throw new Error(`Failed to fetch Jira issue ${issueKey}: ${errorMsg}`);
+    }
+  }
+
+  /**
+   * Extract acceptance criteria from Jira issue description
+   * Looks for patterns like "Acceptance Criteria:", "AC:", "Given/When/Then", etc.
+   * Handles Jira's Wiki Markup format (h2., **bold**, etc.)
+   */
+  private extractAcceptanceCriteriaFromDescription(description: string): string {
+    // Strip Wiki Markup formatting (h2., h3., **bold**, etc.)
+    const cleanDescription = description
+      .replace(/h[1-6]\.\s+/gi, '')  // Remove h1., h2., etc.
+      .replace(/\*\*([^*]+)\*\*/g, '$1')  // Remove bold **text**
+      .replace(/\*([^*]+)\*/g, '$1')  // Remove italic *text*
+      .replace(/`([^`]+)`/g, '$1')  // Remove inline code `text`
+      .trim();
+
+    // Look for sections marked as acceptance criteria
+    const patterns = [
+      /Acceptance\s*Criteria[:\s]*((?:\n.*)+)/i,
+      /AC[:\s]*((?:\n.*)+)/i,
+      /Given\s+When\s+Then((?:\n.*)+)/i,
+      /Expected\s+Behavior[:\s]*((?:\n.*)+)/i,
+    ];
+
+    for (const pattern of patterns) {
+      const match = cleanDescription.match(pattern);
+      if (match) {
+        return match[1].trim();
+      }
+    }
+
+    // If no explicit marker found, return the cleaned description
+    // (assuming it contains the acceptance criteria)
+    return cleanDescription;
+  }
+
+  /**
+   * Parse acceptance criteria from Jira issue text format
+   * Handles Gherkin-style Given/When/Then, numbered lists, and bullet points
+   */
+  private parseJiraAcceptanceCriteria(text: string): AcceptanceCriterion[] {
+    const criteria: AcceptanceCriterion[] = [];
+
+    if (!text || text.trim().length === 0) {
+      return criteria;
+    }
+
+    const normalizedText = text
+      .replace(/\r\n/g, '\n')
+      .replace(/\t/g, '  ')
+      .trim();
+
+    // Try Gherkin format first (Given/When/Then)
+    const gherkinPattern =
+      /(?:^|\n)\s*(?:Given\s+(.+?)[\s]*When\s+(.+?)[\s]*Then\s+(.+?))(?=(?:\n\s*Given|\n\s*$|$))/gis;
+
+    let match: RegExpExecArray | null;
+    while ((match = gherkinPattern.exec(normalizedText)) !== null) {
+      criteria.push({
+        id: `ac-${criteria.length + 1}-${Date.now()}`,
+        given: match[1].trim(),
+        when: match[2].trim(),
+        then: match[3].trim(),
+        rawText: match[0].trim(),
+        tags: [],
+      });
+    }
+
+    // If Gherkin format found, return those
+    if (criteria.length > 0) {
+      return criteria;
+    }
+
+    // Try numbered list format
+    const numberedPattern =
+      /(?:^|\n)\s*(\d+[.)]\s*)(.+?)(?=(?:\n\s*\d+[.)]\s*|\s*$))/gs;
+
+    while ((match = numberedPattern.exec(normalizedText)) !== null) {
+      const itemText = match[2].trim();
+      const parsed = this.convertJiraCriterionToGWT(itemText);
+      criteria.push({
+        id: `ac-${criteria.length + 1}-${Date.now()}`,
+        ...parsed,
+        rawText: itemText,
+        tags: [],
+      });
+    }
+
+    // If numbered format found, return those
+    if (criteria.length > 0) {
+      return criteria;
+    }
+
+    // Try bullet point format - multiple bullet patterns
+    const bulletPatterns = [
+      /(?:^|\n)-\s*\[[xX ]?\]\s+(.+?)(?=(?:\n-\s*\[[xX ]?\]\s+|\s*$))/gs,  // [x] checkbox
+      /(?:^|\n)\s*[-•]\s+(.+?)(?=(?:\n\s*[-•]\s+|\s*$))/gs,  // - or • with space
+      /(?:^|\n)\s*-\s+(.+?)(?=(?:\n\s*-\s+|\s*$))/gs,         // - dash
+      /(?:^|\n)\s*\*\s+(.+?)(?=(?:\n\s*\*\s+|\s*$))/gs,       // * asterisk
+      /(?:^|\n)\s*[•]\s+(.+?)(?=(?:\n\s*[•]\s+|\s*$))/gs,     // • bullet
+    ];
+
+    for (const bulletPattern of bulletPatterns) {
+      while ((match = bulletPattern.exec(normalizedText)) !== null) {
+        const itemText = match[1].trim();
+        if (itemText.length > 10 && !itemText.startsWith('[') && !itemText.toLowerCase().includes('references')) {
+          const parsed = this.convertJiraCriterionToGWT(itemText);
+          criteria.push({
+            id: `ac-${criteria.length + 1}-${Date.now()}`,
+            ...parsed,
+            rawText: itemText,
+            tags: [],
+          });
+        }
+      }
+    }
+
+    // If still nothing, treat entire text as one criterion
+    if (criteria.length === 0) {
+      const parsed = this.convertJiraCriterionToGWT(normalizedText);
+      criteria.push({
+        id: `ac-1-${Date.now()}`,
+        ...parsed,
+        rawText: normalizedText,
+        tags: [],
+      });
+    }
+
+    return criteria;
+  }
+
+  /**
+   * Convert a plain text criterion from Jira into Given/When/Then structure
+   */
+  private convertJiraCriterionToGWT(text: string): { given: string; when: string; then: string } {
+    // Try to detect implicit structure
+    const shouldPattern = /(.+?)\s+should\s+(.+)/i;
+    const whenPattern = /when\s+(.+?),?\s+(?:then\s+)?(.+)/i;
+    const ifPattern = /if\s+(.+?),?\s+(?:then\s+)?(.+)/i;
+    const userPattern = /(?:as a|the)\s+(.+?)\s+(?:can|should|must|will|is able to)\s+(.+)/i;
+
+    let given = 'the system is in its default state';
+    let when = '';
+    let then = '';
+
+    const shouldMatch = text.match(shouldPattern);
+    const whenMatch = text.match(whenPattern);
+    const ifMatch = text.match(ifPattern);
+    const userMatch = text.match(userPattern);
+
+    if (whenMatch) {
+      when = whenMatch[1].trim();
+      then = whenMatch[2].trim();
+    } else if (ifMatch) {
+      given = ifMatch[1].trim();
+      when = 'the condition is met';
+      then = ifMatch[2].trim();
+    } else if (shouldMatch) {
+      when = `interacting with ${shouldMatch[1].trim()}`;
+      then = shouldMatch[2].trim();
+    } else if (userMatch) {
+      given = `a ${userMatch[1].trim()} is authenticated`;
+      when = 'they perform the action';
+      then = userMatch[2].trim();
+    } else {
+      // Fallback: treat entire text as the "then" (expected behavior)
+      when = 'the user performs the described action';
+      then = text;
+    }
+
+    return { given, when, then };
   }
 
   // ================================================================

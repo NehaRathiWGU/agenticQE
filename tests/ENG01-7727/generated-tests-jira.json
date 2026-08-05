@@ -1,0 +1,927 @@
+{
+  "name": "Test Plan: ECS to EKS Migration | FacultySupport-FieldExperienceHealthAPI → ArgoCD/EKS",
+  "description": "Focused test plan — critical path, primary failures, and edge cases",
+  "scenarios": [
+    {
+      "id": "ts-1785961075514-sqoek",
+      "name": "argodeploy/ folder configured in repository",
+      "description": "Happy path + failure + edge case for: argodeploy/ folder configured in repository",
+      "testCases": [
+        {
+          "id": "tc-1785961075514-zzqlf",
+          "summary": "Verify: argodeploy/ folder configured in repository",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "the system is in its default state",
+          "category": "positive",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Precondition established"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Action: the user performs the described action",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify: argodeploy/ folder configured in repository",
+              "data": "",
+              "expectedResult": "argodeploy/ folder configured in repository"
+            }
+          ],
+          "expectedResult": "argodeploy/ folder configured in repository",
+          "labels": [
+            "critical-path"
+          ],
+          "linkedCriterionId": "ac-1-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-60mjg",
+          "summary": "Negative: Deployment with invalid configuration",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "the system is in its default state is NOT satisfied or input is invalid",
+          "category": "negative",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Invalidate precondition or provide bad input for: the user performs the described action",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify no side effects (no data corruption, no partial state)",
+              "data": "",
+              "expectedResult": "System unchanged, clear error to user"
+            }
+          ],
+          "expectedResult": "Operation fails safely with clear feedback",
+          "labels": [
+            "failure-mode"
+          ],
+          "linkedCriterionId": "ac-1-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-bo11v",
+          "summary": "Edge: Rollback mid-deployment / partial failure",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "the system is in its default state",
+          "category": "edge_case",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Ready"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Interrupt deployment mid-process (network drop, timeout)",
+              "data": "Simulate 50% pod failure during rollout",
+              "expectedResult": "System handles gracefully"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify system stability and data integrity",
+              "data": "",
+              "expectedResult": "No crash, no corruption, recoverable state"
+            }
+          ],
+          "expectedResult": "System handles edge condition without failure",
+          "labels": [
+            "edge-case"
+          ],
+          "linkedCriterionId": "ac-1-1785961075512"
+        }
+      ],
+      "category": "functional"
+    },
+    {
+      "id": "ts-1785961075514-4g7np",
+      "name": "ArgoCD pipeline deploys successfully to SIT",
+      "description": "Happy path + failure + edge case for: ArgoCD pipeline deploys successfully to SIT",
+      "testCases": [
+        {
+          "id": "tc-1785961075514-rjhfc",
+          "summary": "Verify: ArgoCD pipeline deploys successfully to SIT",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "the system is in its default state",
+          "category": "positive",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Precondition established"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Action: the user performs the described action",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify: ArgoCD pipeline deploys successfully to SIT",
+              "data": "",
+              "expectedResult": "ArgoCD pipeline deploys successfully to SIT"
+            }
+          ],
+          "expectedResult": "ArgoCD pipeline deploys successfully to SIT",
+          "labels": [
+            "critical-path"
+          ],
+          "linkedCriterionId": "ac-2-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-frowi",
+          "summary": "Negative: Deployment with invalid configuration",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "the system is in its default state is NOT satisfied or input is invalid",
+          "category": "negative",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Invalidate precondition or provide bad input for: the user performs the described action",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify no side effects (no data corruption, no partial state)",
+              "data": "",
+              "expectedResult": "System unchanged, clear error to user"
+            }
+          ],
+          "expectedResult": "Operation fails safely with clear feedback",
+          "labels": [
+            "failure-mode"
+          ],
+          "linkedCriterionId": "ac-2-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-yldxo",
+          "summary": "Edge: Rollback mid-deployment / partial failure",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "the system is in its default state",
+          "category": "edge_case",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Ready"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Interrupt deployment mid-process (network drop, timeout)",
+              "data": "Simulate 50% pod failure during rollout",
+              "expectedResult": "System handles gracefully"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify system stability and data integrity",
+              "data": "",
+              "expectedResult": "No crash, no corruption, recoverable state"
+            }
+          ],
+          "expectedResult": "System handles edge condition without failure",
+          "labels": [
+            "edge-case"
+          ],
+          "linkedCriterionId": "ac-2-1785961075512"
+        }
+      ],
+      "category": "functional"
+    },
+    {
+      "id": "ts-1785961075514-dt45l",
+      "name": "ArgoCD pipeline deploys successfully to STAGE",
+      "description": "Happy path + failure + edge case for: ArgoCD pipeline deploys successfully to STAGE",
+      "testCases": [
+        {
+          "id": "tc-1785961075514-qceey",
+          "summary": "Verify: ArgoCD pipeline deploys successfully to STAGE",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "the system is in its default state",
+          "category": "positive",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Precondition established"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Action: the user performs the described action",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify: ArgoCD pipeline deploys successfully to STAGE",
+              "data": "",
+              "expectedResult": "ArgoCD pipeline deploys successfully to STAGE"
+            }
+          ],
+          "expectedResult": "ArgoCD pipeline deploys successfully to STAGE",
+          "labels": [
+            "critical-path"
+          ],
+          "linkedCriterionId": "ac-3-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-aw2oo",
+          "summary": "Negative: Deployment with invalid configuration",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "the system is in its default state is NOT satisfied or input is invalid",
+          "category": "negative",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Invalidate precondition or provide bad input for: the user performs the described action",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify no side effects (no data corruption, no partial state)",
+              "data": "",
+              "expectedResult": "System unchanged, clear error to user"
+            }
+          ],
+          "expectedResult": "Operation fails safely with clear feedback",
+          "labels": [
+            "failure-mode"
+          ],
+          "linkedCriterionId": "ac-3-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-vw1ur",
+          "summary": "Edge: Rollback mid-deployment / partial failure",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "the system is in its default state",
+          "category": "edge_case",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Ready"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Interrupt deployment mid-process (network drop, timeout)",
+              "data": "Simulate 50% pod failure during rollout",
+              "expectedResult": "System handles gracefully"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify system stability and data integrity",
+              "data": "",
+              "expectedResult": "No crash, no corruption, recoverable state"
+            }
+          ],
+          "expectedResult": "System handles edge condition without failure",
+          "labels": [
+            "edge-case"
+          ],
+          "linkedCriterionId": "ac-3-1785961075512"
+        }
+      ],
+      "category": "functional"
+    },
+    {
+      "id": "ts-1785961075514-mvyww",
+      "name": "Health checks passing on EKS (all environments)",
+      "description": "Happy path + failure + edge case for: Health checks passing on EKS (all environments)",
+      "testCases": [
+        {
+          "id": "tc-1785961075514-urwnq",
+          "summary": "Verify: Health checks passing on EKS (all environments)",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "the system is in its default state",
+          "category": "positive",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Precondition established"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Action: the user performs the described action",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify: Health checks passing on EKS (all environments)",
+              "data": "",
+              "expectedResult": "Health checks passing on EKS (all environments)"
+            }
+          ],
+          "expectedResult": "Health checks passing on EKS (all environments)",
+          "labels": [
+            "critical-path"
+          ],
+          "linkedCriterionId": "ac-4-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-9ujvu",
+          "summary": "Negative: Attempt action when \"the system is in its default state\" is not satisfied",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "the system is in its default state is NOT satisfied or input is invalid",
+          "category": "negative",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Invalidate precondition or provide bad input for: the user performs the described action",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify no side effects (no data corruption, no partial state)",
+              "data": "",
+              "expectedResult": "System unchanged, clear error to user"
+            }
+          ],
+          "expectedResult": "Operation fails safely with clear feedback",
+          "labels": [
+            "failure-mode"
+          ],
+          "linkedCriterionId": "ac-4-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-i7gkx",
+          "summary": "Edge: Flapping health check (intermittent pass/fail)",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "the system is in its default state",
+          "category": "edge_case",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Ready"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Simulate intermittent health check failure (flapping)",
+              "data": "User with max concurrent sessions",
+              "expectedResult": "System handles gracefully"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify system stability and data integrity",
+              "data": "",
+              "expectedResult": "No crash, no corruption, recoverable state"
+            }
+          ],
+          "expectedResult": "System handles edge condition without failure",
+          "labels": [
+            "edge-case"
+          ],
+          "linkedCriterionId": "ac-4-1785961075512"
+        }
+      ],
+      "category": "functional"
+    },
+    {
+      "id": "ts-1785961075514-fliaz",
+      "name": "PROD deployment via ArgoCD (pod running, no traffic)",
+      "description": "Happy path + failure + edge case for: PROD deployment via ArgoCD (pod running, no traffic)",
+      "testCases": [
+        {
+          "id": "tc-1785961075514-08qaz",
+          "summary": "Verify: PROD deployment via ArgoCD (pod running, no traffic)",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "the system is in its default state",
+          "category": "positive",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Precondition established"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Action: the user performs the described action",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify: PROD deployment via ArgoCD (pod running, no traffic)",
+              "data": "",
+              "expectedResult": "PROD deployment via ArgoCD (pod running, no traffic)"
+            }
+          ],
+          "expectedResult": "PROD deployment via ArgoCD (pod running, no traffic)",
+          "labels": [
+            "critical-path"
+          ],
+          "linkedCriterionId": "ac-5-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-dqzgo",
+          "summary": "Negative: Deployment with invalid configuration",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "the system is in its default state is NOT satisfied or input is invalid",
+          "category": "negative",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Invalidate precondition or provide bad input for: the user performs the described action",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify no side effects (no data corruption, no partial state)",
+              "data": "",
+              "expectedResult": "System unchanged, clear error to user"
+            }
+          ],
+          "expectedResult": "Operation fails safely with clear feedback",
+          "labels": [
+            "failure-mode"
+          ],
+          "linkedCriterionId": "ac-5-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-03knp",
+          "summary": "Edge: Rollback mid-deployment / partial failure",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "the system is in its default state",
+          "category": "edge_case",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Ready"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Interrupt deployment mid-process (network drop, timeout)",
+              "data": "Simulate 50% pod failure during rollout",
+              "expectedResult": "System handles gracefully"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify system stability and data integrity",
+              "data": "",
+              "expectedResult": "No crash, no corruption, recoverable state"
+            }
+          ],
+          "expectedResult": "System handles edge condition without failure",
+          "labels": [
+            "edge-case"
+          ],
+          "linkedCriterionId": "ac-5-1785961075512"
+        }
+      ],
+      "category": "functional"
+    },
+    {
+      "id": "ts-1785961075514-c26q3",
+      "name": "PROD traffic cutover complete (API Gateway pointing to EKS LB)",
+      "description": "Happy path + failure + edge case for: PROD traffic cutover complete (API Gateway pointing to EKS LB)",
+      "testCases": [
+        {
+          "id": "tc-1785961075514-cco3t",
+          "summary": "Verify: PROD traffic cutover complete (API Gateway pointing to EKS LB)",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "the system is in its default state",
+          "category": "positive",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Precondition established"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Action: the user performs the described action",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify: PROD traffic cutover complete (API Gateway pointing to EKS LB)",
+              "data": "",
+              "expectedResult": "PROD traffic cutover complete (API Gateway pointing to EKS LB)"
+            }
+          ],
+          "expectedResult": "PROD traffic cutover complete (API Gateway pointing to EKS LB)",
+          "labels": [
+            "critical-path"
+          ],
+          "linkedCriterionId": "ac-6-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-op45y",
+          "summary": "Negative: Request with malformed payload",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "the system is in its default state is NOT satisfied or input is invalid",
+          "category": "negative",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Invalidate precondition or provide bad input for: the user performs the described action",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify no side effects (no data corruption, no partial state)",
+              "data": "",
+              "expectedResult": "System unchanged, clear error to user"
+            }
+          ],
+          "expectedResult": "Operation fails safely with clear feedback",
+          "labels": [
+            "failure-mode"
+          ],
+          "linkedCriterionId": "ac-6-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-tcprv",
+          "summary": "Edge: Rapid repeated execution of: the user performs the described action",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "the system is in its default state",
+          "category": "edge_case",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Ready"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Execute action twice rapidly in quick succession",
+              "data": "User with max concurrent sessions",
+              "expectedResult": "System handles gracefully"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify system stability and data integrity",
+              "data": "",
+              "expectedResult": "No crash, no corruption, recoverable state"
+            }
+          ],
+          "expectedResult": "System handles edge condition without failure",
+          "labels": [
+            "edge-case"
+          ],
+          "linkedCriterionId": "ac-6-1785961075512"
+        }
+      ],
+      "category": "functional"
+    },
+    {
+      "id": "ts-1785961075514-as9i4",
+      "name": "ECS tasks scaled to 0 after validation period",
+      "description": "Happy path + failure + edge case for: ECS tasks scaled to 0 after validation period",
+      "testCases": [
+        {
+          "id": "tc-1785961075514-48zw5",
+          "summary": "Verify: ECS tasks scaled to 0 after validation period",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "the system is in its default state",
+          "category": "positive",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Precondition established"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Action: the user performs the described action",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify: ECS tasks scaled to 0 after validation period",
+              "data": "",
+              "expectedResult": "ECS tasks scaled to 0 after validation period"
+            }
+          ],
+          "expectedResult": "ECS tasks scaled to 0 after validation period",
+          "labels": [
+            "critical-path"
+          ],
+          "linkedCriterionId": "ac-7-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-fxugu",
+          "summary": "Negative: Attempt action when \"the system is in its default state\" is not satisfied",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "the system is in its default state is NOT satisfied or input is invalid",
+          "category": "negative",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Invalidate precondition or provide bad input for: the user performs the described action",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify no side effects (no data corruption, no partial state)",
+              "data": "",
+              "expectedResult": "System unchanged, clear error to user"
+            }
+          ],
+          "expectedResult": "Operation fails safely with clear feedback",
+          "labels": [
+            "failure-mode"
+          ],
+          "linkedCriterionId": "ac-7-1785961075512"
+        },
+        {
+          "id": "tc-1785961075514-8p79v",
+          "summary": "Edge: Behavior under max load / resource exhaustion",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "the system is in its default state",
+          "category": "edge_case",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Setup: the system is in its default state",
+              "data": "",
+              "expectedResult": "Ready"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Execute action twice rapidly in quick succession",
+              "data": "User with max concurrent sessions",
+              "expectedResult": "System handles gracefully"
+            },
+            {
+              "stepNumber": 3,
+              "action": "Verify system stability and data integrity",
+              "data": "",
+              "expectedResult": "No crash, no corruption, recoverable state"
+            }
+          ],
+          "expectedResult": "System handles edge condition without failure",
+          "labels": [
+            "edge-case"
+          ],
+          "linkedCriterionId": "ac-7-1785961075512"
+        }
+      ],
+      "category": "functional"
+    },
+    {
+      "id": "ts-1785961075515-t8ex5",
+      "name": "API Tests: PROD traffic cutover complete (API Gateway pointing to EK...",
+      "description": "5 crucial API tests: happy path, status code, auth, method behavior, security",
+      "testCases": [
+        {
+          "id": "tc-1785961075515-86kx9",
+          "summary": "[API-Happy] POST creates resource, GET confirms",
+          "description": "[API-Happy] POST creates resource, GET confirms",
+          "preconditions": "API running. the system is in its default state",
+          "category": "api",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "POST /api/v1/resource with valid auth and body",
+              "data": "{\"field\":\"value\"}",
+              "expectedResult": "Status: 201 Created"
+            },
+            {
+              "stepNumber": 2,
+              "action": "GET the new resource by returned ID",
+              "data": "",
+              "expectedResult": "Status: 200, body matches posted data"
+            }
+          ],
+          "expectedResult": "Status: 200, body matches posted data",
+          "labels": [
+            "api",
+            "happy-path"
+          ],
+          "linkedCriterionId": "ac-6-1785961075512"
+        },
+        {
+          "id": "tc-1785961075515-4lb5i",
+          "summary": "[API-401] Unauthorized without valid token",
+          "description": "[API-401] Unauthorized without valid token",
+          "preconditions": "API running. the system is in its default state",
+          "category": "api",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "GET /api/v1/resource with no Authorization header",
+              "data": "",
+              "expectedResult": "Status: 401 Unauthorized"
+            },
+            {
+              "stepNumber": 2,
+              "action": "GET /api/v1/resource with expired/invalid token",
+              "data": "Authorization: Bearer invalid",
+              "expectedResult": "Status: 401, no data leaked"
+            }
+          ],
+          "expectedResult": "Status: 401, no data leaked",
+          "labels": [
+            "api",
+            "status-code",
+            "401"
+          ],
+          "linkedCriterionId": "ac-6-1785961075512"
+        },
+        {
+          "id": "tc-1785961075515-l7oy0",
+          "summary": "[API-Auth] Cross-user data isolation enforced",
+          "description": "[API-Auth] Cross-user data isolation enforced",
+          "preconditions": "API running. the system is in its default state",
+          "category": "api",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "Auth as User A, request User B's resource",
+              "data": "GET /api/v1/resource/{userB_id}",
+              "expectedResult": "Status: 403 or 404"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Verify zero data from User B in response",
+              "data": "",
+              "expectedResult": "No data leakage"
+            }
+          ],
+          "expectedResult": "No data leakage",
+          "labels": [
+            "api",
+            "auth",
+            "isolation"
+          ],
+          "linkedCriterionId": "ac-6-1785961075512"
+        },
+        {
+          "id": "tc-1785961075515-0h5i0",
+          "summary": "[API-Method] PUT/DELETE are idempotent",
+          "description": "[API-Method] PUT/DELETE are idempotent",
+          "preconditions": "API running. the system is in its default state",
+          "category": "api",
+          "priority": "high",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "PUT /api/v1/resource/{id} with same body twice",
+              "data": "{\"name\":\"same\"}",
+              "expectedResult": "Both return 200, identical response"
+            },
+            {
+              "stepNumber": 2,
+              "action": "DELETE /api/v1/resource/{id} twice",
+              "data": "",
+              "expectedResult": "1st: 204, 2nd: 204 or 404 (no crash)"
+            }
+          ],
+          "expectedResult": "1st: 204, 2nd: 204 or 404 (no crash)",
+          "labels": [
+            "api",
+            "idempotency"
+          ],
+          "linkedCriterionId": "ac-6-1785961075512"
+        },
+        {
+          "id": "tc-1785961075515-vampa",
+          "summary": "[API-Security] SQL injection blocked",
+          "description": "[API-Security] SQL injection blocked",
+          "preconditions": "API running. the system is in its default state",
+          "category": "api",
+          "priority": "critical",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "POST /api/v1/resource with SQL payload",
+              "data": "{\"name\":\"' OR 1=1 --\"}",
+              "expectedResult": "Status: 400/422 or stored as literal string"
+            },
+            {
+              "stepNumber": 2,
+              "action": "Verify DB integrity (no tables dropped)",
+              "data": "",
+              "expectedResult": "Database unchanged"
+            }
+          ],
+          "expectedResult": "Database unchanged",
+          "labels": [
+            "api",
+            "security",
+            "injection"
+          ],
+          "linkedCriterionId": "ac-6-1785961075512"
+        }
+      ],
+      "category": "api"
+    }
+  ],
+  "summary": {
+    "totalScenarios": 8,
+    "totalTestCases": 26,
+    "byCategory": {
+      "positive": 7,
+      "negative": 7,
+      "edge_case": 7,
+      "functional": 0,
+      "boundary": 0,
+      "error_handling": 0,
+      "security": 0,
+      "performance": 0,
+      "api": 5
+    },
+    "byPriority": {
+      "critical": 11,
+      "high": 15,
+      "medium": 0,
+      "low": 0
+    }
+  }
+}

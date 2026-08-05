@@ -9,5 +9,6 @@ export { AcceptanceCriteriaParser } from './parser';
 export { TestCaseGenerator } from './generator';
 export { ApiTestGenerator } from './generator';
 export { XrayClient } from './xray';
-export { loadConfig, validateConfig } from './config';
+export { TemplateSystem, templateSystem } from './template';
+export { loadConfig, validateConfig, isLocalModeValid, loadProjectConfig, listProjects, getAcceptanceCriteriaField } from './config';
 export * from './types';

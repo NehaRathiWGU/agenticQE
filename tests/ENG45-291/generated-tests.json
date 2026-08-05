@@ -1,2381 +1,470 @@
 {
   "name": "Test Plan: ENG45-291 A11y Landmarks",
-  "description": "Comprehensive test plan generated from acceptance criteria for \"ENG45-291 A11y Landmarks\"",
+  "description": "Focused test plan — critical path, primary failures, and edge cases",
   "scenarios": [
     {
-      "id": "ts-1784756197890-0wq72",
-      "name": "Positive Tests: the page should have an HTML <main> element or ...",
-      "description": "Verify the system behaves correctly under expected conditions",
+      "id": "ts-1784757536195-bq6tw",
+      "name": "the page should have an HTML <main> element or ARIA role=\"main\" wrapping the ...",
+      "description": "Happy path + failure + edge case for: the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content",
       "testCases": [
         {
-          "id": "tc-1784756197890-wb28e",
-          "summary": "[Positive] Verify: the page should have an HTML <main> element or ARIA role=\"main\" wrapping the ...",
-          "description": "Validate that when the preconditions are met and the action is performed, the expected outcome occurs as specified.",
-          "preconditions": "Given a user navigating with a screen reader",
+          "id": "tc-1784757536195-799qi",
+          "summary": "Verify: the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "a user navigating with a screen reader",
           "category": "positive",
-          "priority": "high",
+          "priority": "critical",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Set up precondition: a user navigating with a screen reader",
+              "action": "Setup: a user navigating with a screen reader",
               "data": "",
-              "expectedResult": "System is in the expected initial state"
+              "expectedResult": "Precondition established"
             },
             {
               "stepNumber": 2,
-              "action": "Perform action: they open any course page (e.g., D353)",
-              "data": "Use valid, expected input data",
-              "expectedResult": "Action is accepted and processed"
+              "action": "Action: they open any course page (e.g., D353)",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
             },
             {
               "stepNumber": 3,
-              "action": "Verify the outcome",
+              "action": "Verify: the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content",
               "data": "",
               "expectedResult": "the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content"
             }
           ],
           "expectedResult": "the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content",
           "labels": [
-            "positive",
-            "happy-path",
+            "critical-path",
             "security",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
+          "linkedCriterionId": "ac-1784757536194-jibmp1g"
         },
         {
-          "id": "tc-1784756197890-t5pos",
-          "summary": "[Positive] Verify repeated action: they open any course page (e.g., D353)",
-          "description": "Validate that the action can be performed multiple times with consistent results.",
-          "preconditions": "Given a user navigating with a screen reader",
-          "category": "positive",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: a user navigating with a screen reader",
-              "data": "",
-              "expectedResult": "System is in the expected initial state"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action first time: they open any course page (e.g., D353)",
-              "data": "Valid input data",
-              "expectedResult": "the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Reset to initial state if applicable",
-              "data": "",
-              "expectedResult": "System returns to initial state"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Perform action second time: they open any course page (e.g., D353)",
-              "data": "Same valid input data",
-              "expectedResult": "Same result as first execution: the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content"
-            }
-          ],
-          "expectedResult": "Consistent behavior across multiple executions",
-          "labels": [
-            "positive",
-            "repeatability",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        }
-      ],
-      "category": "positive"
-    },
-    {
-      "id": "ts-1784756197890-6p9pu",
-      "name": "Negative Tests: the page should have an HTML <main> element or ...",
-      "description": "Verify the system handles invalid/unexpected conditions gracefully",
-      "testCases": [
-        {
-          "id": "tc-1784756197890-tgj1m",
-          "summary": "[Negative] Attempt action without precondition: a user navigating with a screen reader",
-          "description": "Validate that the system handles the case when preconditions are NOT met.",
-          "preconditions": "Given a user navigating with a screen reader is NOT satisfied",
+          "id": "tc-1784757536195-h3gjy",
+          "summary": "Negative: Attempt action when \"a user navigating with a screen reader\" is not satisfied",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "a user navigating with a screen reader is NOT satisfied or input is invalid",
           "category": "negative",
           "priority": "high",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Ensure precondition is NOT met: Skip or invalidate \"a user navigating with a screen reader\"",
-              "data": "",
-              "expectedResult": "System is NOT in the expected initial state"
+              "action": "Invalidate precondition or provide bad input for: they open any course page (e.g., D353)",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
             },
             {
               "stepNumber": 2,
-              "action": "Attempt to perform: they open any course page (e.g., D353)",
-              "data": "Valid input data but invalid precondition",
-              "expectedResult": "System prevents the action or shows appropriate error"
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
             },
             {
               "stepNumber": 3,
-              "action": "Verify error handling",
+              "action": "Verify no side effects (no data corruption, no partial state)",
               "data": "",
-              "expectedResult": "Appropriate error message is displayed; no data corruption occurs"
+              "expectedResult": "System unchanged, clear error to user"
             }
           ],
-          "expectedResult": "System gracefully handles missing preconditions",
+          "expectedResult": "Operation fails safely with clear feedback",
           "labels": [
-            "negative",
-            "precondition-failure",
+            "failure-mode",
             "security",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
+          "linkedCriterionId": "ac-1784757536194-jibmp1g"
         },
         {
-          "id": "tc-1784756197890-t9znu",
-          "summary": "[Negative] Provide invalid input for: they open any course page (e.g., D353)",
-          "description": "Validate that the system correctly rejects invalid input data.",
-          "preconditions": "Given a user navigating with a screen reader",
-          "category": "negative",
+          "id": "tc-1784757536195-zkzol",
+          "summary": "Edge: Render under slow network / partial DOM load",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "a user navigating with a screen reader",
+          "category": "edge_case",
           "priority": "high",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Set up precondition: a user navigating with a screen reader",
+              "action": "Setup: a user navigating with a screen reader",
               "data": "",
-              "expectedResult": "System is in the expected initial state"
+              "expectedResult": "Ready"
             },
             {
               "stepNumber": 2,
-              "action": "Perform action with invalid data: they open any course page (e.g., D353)",
-              "data": "Invalid/malformed input (empty strings, wrong types, special characters)",
-              "expectedResult": "System rejects the input with a validation error"
+              "action": "Rapid navigation away and back during load",
+              "data": "User with max concurrent sessions",
+              "expectedResult": "System handles gracefully"
             },
             {
               "stepNumber": 3,
-              "action": "Verify no side effects occurred",
+              "action": "Verify system stability and data integrity",
               "data": "",
-              "expectedResult": "System state remains unchanged; no partial updates"
+              "expectedResult": "No crash, no corruption, recoverable state"
             }
           ],
-          "expectedResult": "Input validation prevents processing of invalid data",
-          "labels": [
-            "negative",
-            "invalid-input",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        },
-        {
-          "id": "tc-1784756197890-452mx",
-          "summary": "[Negative] Attempt action without proper authorization",
-          "description": "Validate that unauthorized users cannot perform the action.",
-          "preconditions": "User is NOT authorized or not logged in",
-          "category": "negative",
-          "priority": "high",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Ensure user is not authenticated or lacks required permissions",
-              "data": "Use unauthenticated session or low-privilege account",
-              "expectedResult": "User has insufficient permissions"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Attempt to perform: they open any course page (e.g., D353)",
-              "data": "",
-              "expectedResult": "System denies access with 401/403 or appropriate error"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify no data was modified",
-              "data": "",
-              "expectedResult": "No changes were made to the system"
-            }
-          ],
-          "expectedResult": "Unauthorized access is properly blocked",
-          "labels": [
-            "negative",
-            "security",
-            "authorization",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        }
-      ],
-      "category": "negative"
-    },
-    {
-      "id": "ts-1784756197890-bwdbd",
-      "name": "Edge Case Tests: the page should have an HTML <main> element or ...",
-      "description": "Verify system behavior at boundaries and unusual conditions",
-      "testCases": [
-        {
-          "id": "tc-1784756197890-s1xjm",
-          "summary": "[Edge Case] Empty/null input for: they open any course page (e.g., D353)",
-          "description": "Test behavior when input is empty, null, or undefined.",
-          "preconditions": "Given a user navigating with a screen reader",
-          "category": "edge_case",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: a user navigating with a screen reader",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with empty/null values: they open any course page (e.g., D353)",
-              "data": "null, undefined, empty string \"\", empty array []",
-              "expectedResult": "System handles gracefully without crashing"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify system stability",
-              "data": "",
-              "expectedResult": "No unhandled exceptions; appropriate feedback provided"
-            }
-          ],
-          "expectedResult": "System handles empty/null input without failure",
+          "expectedResult": "System handles edge condition without failure",
           "labels": [
             "edge-case",
-            "null-handling",
             "security",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        },
-        {
-          "id": "tc-1784756197890-cvh5m",
-          "summary": "[Edge Case] Concurrent execution: they open any course page (e.g., D353)",
-          "description": "Test behavior when multiple users/processes perform the action simultaneously.",
-          "preconditions": "Given a user navigating with a screen reader (multiple concurrent sessions)",
-          "category": "edge_case",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition for multiple users: a user navigating with a screen reader",
-              "data": "2+ concurrent sessions",
-              "expectedResult": "Multiple sessions established"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Simultaneously perform: they open any course page (e.g., D353)",
-              "data": "Execute from multiple sessions at the same time",
-              "expectedResult": "No race conditions or data corruption"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify data integrity",
-              "data": "",
-              "expectedResult": "All operations complete correctly or fail gracefully with proper locking"
-            }
-          ],
-          "expectedResult": "System handles concurrent access without data corruption",
-          "labels": [
-            "edge-case",
-            "concurrency",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        },
-        {
-          "id": "tc-1784756197890-4ffty",
-          "summary": "[Edge Case] Special characters in input",
-          "description": "Test with special characters, unicode, emojis, and extreme-length input.",
-          "preconditions": "Given a user navigating with a screen reader",
-          "category": "edge_case",
-          "priority": "low",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: a user navigating with a screen reader",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with special input: they open any course page (e.g., D353)",
-              "data": "Unicode: émojis 🎉, HTML: <script>alert(1)</script>, SQL: ' OR 1=1 --, Very long string (10000+ chars)",
-              "expectedResult": "Input is sanitized and processed or rejected safely"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Check for XSS, injection, or display issues",
-              "data": "",
-              "expectedResult": "No security vulnerabilities; content displayed/stored correctly"
-            }
-          ],
-          "expectedResult": "Special characters are handled safely",
-          "labels": [
-            "edge-case",
-            "special-chars",
-            "security",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        }
-      ],
-      "category": "edge_case"
-    },
-    {
-      "id": "ts-1784756197890-8qzo8",
-      "name": "Functional Tests: the page should have an HTML <main> element or ...",
-      "description": "Verify end-to-end functional correctness",
-      "testCases": [
-        {
-          "id": "tc-1784756197890-xp4hd",
-          "summary": "[Functional] Complete flow: the page should have an HTML <main> element or ARIA role=...",
-          "description": "End-to-end functional test covering the full user journey.",
-          "preconditions": "Given a user navigating with a screen reader",
-          "category": "functional",
-          "priority": "critical",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Start from a clean state",
-              "data": "",
-              "expectedResult": "System is in initial state"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Establish preconditions: a user navigating with a screen reader",
-              "data": "Set up all required preconditions",
-              "expectedResult": "All preconditions are met"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Execute the main action: they open any course page (e.g., D353)",
-              "data": "Use realistic, production-like data",
-              "expectedResult": "Action completes successfully"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify expected outcome: the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content",
-              "data": "",
-              "expectedResult": "the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content"
-            },
-            {
-              "stepNumber": 5,
-              "action": "Verify any side effects (notifications, logs, data changes)",
-              "data": "",
-              "expectedResult": "All expected side effects occurred correctly"
-            }
-          ],
-          "expectedResult": "the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content",
-          "labels": [
-            "functional",
-            "e2e",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        },
-        {
-          "id": "tc-1784756197890-6hf9b",
-          "summary": "[Functional] State transition: they open any course page (e.g., D353)",
-          "description": "Verify the system transitions correctly between states.",
-          "preconditions": "Given a user navigating with a screen reader",
-          "category": "functional",
-          "priority": "high",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Document the initial system state",
-              "data": "Record current state values",
-              "expectedResult": "Initial state recorded"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action: they open any course page (e.g., D353)",
-              "data": "",
-              "expectedResult": "Action triggers state change"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify the new system state",
-              "data": "",
-              "expectedResult": "System transitioned to new state reflecting: the page should have an HTML <main> element or ARIA role=\"main\" wrapping the primary content"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify no unintended state changes occurred",
-              "data": "Check related entities remain unchanged",
-              "expectedResult": "Only the expected state changed"
-            }
-          ],
-          "expectedResult": "Clean state transition with no unintended side effects",
-          "labels": [
-            "functional",
-            "state-transition",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
+          "linkedCriterionId": "ac-1784757536194-jibmp1g"
         }
       ],
       "category": "functional"
     },
     {
-      "id": "ts-1784756197890-ecddy",
-      "name": "Boundary Tests: the page should have an HTML <main> element or ...",
-      "description": "Verify behavior at value boundaries and limits",
+      "id": "ts-1784757536195-ieukk",
+      "name": "all page content including headings, buttons, and interactive elements should...",
+      "description": "Happy path + failure + edge case for: all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)",
       "testCases": [
         {
-          "id": "tc-1784756197890-mcg67",
-          "summary": "[Boundary] Min/max values for: they open any course page (e.g., D353)",
-          "description": "Test with minimum and maximum allowed values.",
-          "preconditions": "Given a user navigating with a screen reader",
-          "category": "boundary",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: a user navigating with a screen reader",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with minimum valid value: they open any course page (e.g., D353)",
-              "data": "Minimum allowed value (e.g., 1 char, 0, min date)",
-              "expectedResult": "System accepts minimum value"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Perform action with maximum valid value: they open any course page (e.g., D353)",
-              "data": "Maximum allowed value (e.g., max length, max int, future date)",
-              "expectedResult": "System accepts maximum value"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Perform action with value just beyond maximum",
-              "data": "Max + 1, over length limit",
-              "expectedResult": "System rejects with appropriate error"
-            }
-          ],
-          "expectedResult": "Boundary values are handled correctly",
-          "labels": [
-            "boundary",
-            "min-max",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        },
-        {
-          "id": "tc-1784756197890-3t85c",
-          "summary": "[Boundary] Timeout/rate limit behavior",
-          "description": "Test system behavior at timeout boundaries and rate limits.",
-          "preconditions": "Given a user navigating with a screen reader",
-          "category": "boundary",
-          "priority": "low",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: a user navigating with a screen reader",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Simulate slow network or processing near timeout threshold",
-              "data": "Add artificial delay close to timeout limit",
-              "expectedResult": "System completes before timeout OR times out gracefully"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Rapidly repeat the action to test rate limiting",
-              "data": "Execute 100+ times in quick succession",
-              "expectedResult": "Rate limiting activates; clear feedback provided"
-            }
-          ],
-          "expectedResult": "Timeouts and rate limits are handled gracefully",
-          "labels": [
-            "boundary",
-            "timeout",
-            "rate-limit",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        }
-      ],
-      "category": "boundary"
-    },
-    {
-      "id": "ts-1784756197890-2l4fi",
-      "name": "Error Handling Tests: the page should have an HTML <main> element or ...",
-      "description": "Verify proper error handling and system resilience",
-      "testCases": [
-        {
-          "id": "tc-1784756197890-7wff7",
-          "summary": "[Error Handling] Network failure during: they open any course page (e.g., D353)",
-          "description": "Test system behavior when network connectivity is lost during the action.",
-          "preconditions": "Given a user navigating with a screen reader",
-          "category": "error_handling",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: a user navigating with a screen reader",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Begin action: they open any course page (e.g., D353)",
-              "data": "",
-              "expectedResult": "Action starts processing"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Simulate network disconnection during processing",
-              "data": "Drop network connection / simulate timeout",
-              "expectedResult": "System detects failure and shows appropriate error"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Restore network and verify system recovery",
-              "data": "",
-              "expectedResult": "System recovers gracefully; no data loss or corruption"
-            }
-          ],
-          "expectedResult": "System handles network failures without data loss",
-          "labels": [
-            "error-handling",
-            "network",
-            "resilience",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        },
-        {
-          "id": "tc-1784756197890-re93y",
-          "summary": "[Error Handling] Downstream service failure",
-          "description": "Test behavior when a dependent service is unavailable.",
-          "preconditions": "Given a user navigating with a screen reader AND a dependent service is down",
-          "category": "error_handling",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: a user navigating with a screen reader",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Make a dependent service unavailable (mock 500/503 responses)",
-              "data": "Simulate downstream service failure",
-              "expectedResult": "Dependent service is unreachable"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Attempt to perform: they open any course page (e.g., D353)",
-              "data": "",
-              "expectedResult": "System handles dependency failure gracefully"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify user-facing error message",
-              "data": "",
-              "expectedResult": "Clear, non-technical error message displayed to user"
-            }
-          ],
-          "expectedResult": "Graceful degradation when dependencies fail",
-          "labels": [
-            "error-handling",
-            "dependency",
-            "resilience",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-55httim"
-        }
-      ],
-      "category": "error_handling"
-    },
-    {
-      "id": "ts-1784756197891-0i7pt",
-      "name": "Positive Tests: all page content including headings, buttons, a...",
-      "description": "Verify the system behaves correctly under expected conditions",
-      "testCases": [
-        {
-          "id": "tc-1784756197890-vp96f",
-          "summary": "[Positive] Verify: all page content including headings, buttons, and interactive elements should...",
-          "description": "Validate that when the preconditions are met and the action is performed, the expected outcome occurs as specified.",
-          "preconditions": "Given the page content structure",
+          "id": "tc-1784757536195-nnwd8",
+          "summary": "Verify: all page content including headings, buttons, and interactive elements should be contained within...",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "the page content structure",
           "category": "positive",
-          "priority": "high",
+          "priority": "critical",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Set up precondition: the page content structure",
+              "action": "Setup: the page content structure",
               "data": "",
-              "expectedResult": "System is in the expected initial state"
+              "expectedResult": "Precondition established"
             },
             {
               "stepNumber": 2,
-              "action": "Perform action: assistive technology scans for landmarks",
-              "data": "Use valid, expected input data",
-              "expectedResult": "Action is accepted and processed"
+              "action": "Action: assistive technology scans for landmarks",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
             },
             {
               "stepNumber": 3,
-              "action": "Verify the outcome",
+              "action": "Verify: all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)",
               "data": "",
               "expectedResult": "all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)"
             }
           ],
           "expectedResult": "all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)",
           "labels": [
-            "positive",
-            "happy-path",
+            "critical-path",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
+          "linkedCriterionId": "ac-1784757536194-njg5qdj"
         },
         {
-          "id": "tc-1784756197891-1sx2w",
-          "summary": "[Positive] Verify repeated action: assistive technology scans for landmarks",
-          "description": "Validate that the action can be performed multiple times with consistent results.",
-          "preconditions": "Given the page content structure",
-          "category": "positive",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the page content structure",
-              "data": "",
-              "expectedResult": "System is in the expected initial state"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action first time: assistive technology scans for landmarks",
-              "data": "Valid input data",
-              "expectedResult": "all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Reset to initial state if applicable",
-              "data": "",
-              "expectedResult": "System returns to initial state"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Perform action second time: assistive technology scans for landmarks",
-              "data": "Same valid input data",
-              "expectedResult": "Same result as first execution: all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)"
-            }
-          ],
-          "expectedResult": "Consistent behavior across multiple executions",
-          "labels": [
-            "positive",
-            "repeatability",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        }
-      ],
-      "category": "positive"
-    },
-    {
-      "id": "ts-1784756197891-l2baw",
-      "name": "Negative Tests: all page content including headings, buttons, a...",
-      "description": "Verify the system handles invalid/unexpected conditions gracefully",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-ch57l",
-          "summary": "[Negative] Attempt action without precondition: the page content structure",
-          "description": "Validate that the system handles the case when preconditions are NOT met.",
-          "preconditions": "Given the page content structure is NOT satisfied",
+          "id": "tc-1784757536195-stym9",
+          "summary": "Negative: Attempt action when \"the page content structure\" is not satisfied",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "the page content structure is NOT satisfied or input is invalid",
           "category": "negative",
           "priority": "high",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Ensure precondition is NOT met: Skip or invalidate \"the page content structure\"",
-              "data": "",
-              "expectedResult": "System is NOT in the expected initial state"
+              "action": "Invalidate precondition or provide bad input for: assistive technology scans for landmarks",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
             },
             {
               "stepNumber": 2,
-              "action": "Attempt to perform: assistive technology scans for landmarks",
-              "data": "Valid input data but invalid precondition",
-              "expectedResult": "System prevents the action or shows appropriate error"
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
             },
             {
               "stepNumber": 3,
-              "action": "Verify error handling",
+              "action": "Verify no side effects (no data corruption, no partial state)",
               "data": "",
-              "expectedResult": "Appropriate error message is displayed; no data corruption occurs"
+              "expectedResult": "System unchanged, clear error to user"
             }
           ],
-          "expectedResult": "System gracefully handles missing preconditions",
+          "expectedResult": "Operation fails safely with clear feedback",
           "labels": [
-            "negative",
-            "precondition-failure",
+            "failure-mode",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
+          "linkedCriterionId": "ac-1784757536194-njg5qdj"
         },
         {
-          "id": "tc-1784756197891-puqko",
-          "summary": "[Negative] Provide invalid input for: assistive technology scans for landmarks",
-          "description": "Validate that the system correctly rejects invalid input data.",
-          "preconditions": "Given the page content structure",
-          "category": "negative",
+          "id": "tc-1784757536195-1nvxm",
+          "summary": "Edge: Render under slow network / partial DOM load",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "the page content structure",
+          "category": "edge_case",
           "priority": "high",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Set up precondition: the page content structure",
+              "action": "Setup: the page content structure",
               "data": "",
-              "expectedResult": "System is in the expected initial state"
+              "expectedResult": "Ready"
             },
             {
               "stepNumber": 2,
-              "action": "Perform action with invalid data: assistive technology scans for landmarks",
-              "data": "Invalid/malformed input (empty strings, wrong types, special characters)",
-              "expectedResult": "System rejects the input with a validation error"
+              "action": "Rapid navigation away and back during load",
+              "data": "Boundary values, null fields, rapid repetition",
+              "expectedResult": "System handles gracefully"
             },
             {
               "stepNumber": 3,
-              "action": "Verify no side effects occurred",
+              "action": "Verify system stability and data integrity",
               "data": "",
-              "expectedResult": "System state remains unchanged; no partial updates"
+              "expectedResult": "No crash, no corruption, recoverable state"
             }
           ],
-          "expectedResult": "Input validation prevents processing of invalid data",
-          "labels": [
-            "negative",
-            "invalid-input",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        },
-        {
-          "id": "tc-1784756197891-fepxc",
-          "summary": "[Negative] Attempt action without proper authorization",
-          "description": "Validate that unauthorized users cannot perform the action.",
-          "preconditions": "User is NOT authorized or not logged in",
-          "category": "negative",
-          "priority": "high",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Ensure user is not authenticated or lacks required permissions",
-              "data": "Use unauthenticated session or low-privilege account",
-              "expectedResult": "User has insufficient permissions"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Attempt to perform: assistive technology scans for landmarks",
-              "data": "",
-              "expectedResult": "System denies access with 401/403 or appropriate error"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify no data was modified",
-              "data": "",
-              "expectedResult": "No changes were made to the system"
-            }
-          ],
-          "expectedResult": "Unauthorized access is properly blocked",
-          "labels": [
-            "negative",
-            "security",
-            "authorization",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        }
-      ],
-      "category": "negative"
-    },
-    {
-      "id": "ts-1784756197891-3pv3m",
-      "name": "Edge Case Tests: all page content including headings, buttons, a...",
-      "description": "Verify system behavior at boundaries and unusual conditions",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-ki3is",
-          "summary": "[Edge Case] Empty/null input for: assistive technology scans for landmarks",
-          "description": "Test behavior when input is empty, null, or undefined.",
-          "preconditions": "Given the page content structure",
-          "category": "edge_case",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the page content structure",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with empty/null values: assistive technology scans for landmarks",
-              "data": "null, undefined, empty string \"\", empty array []",
-              "expectedResult": "System handles gracefully without crashing"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify system stability",
-              "data": "",
-              "expectedResult": "No unhandled exceptions; appropriate feedback provided"
-            }
-          ],
-          "expectedResult": "System handles empty/null input without failure",
+          "expectedResult": "System handles edge condition without failure",
           "labels": [
             "edge-case",
-            "null-handling",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        },
-        {
-          "id": "tc-1784756197891-o8hxv",
-          "summary": "[Edge Case] Concurrent execution: assistive technology scans for landmarks",
-          "description": "Test behavior when multiple users/processes perform the action simultaneously.",
-          "preconditions": "Given the page content structure (multiple concurrent sessions)",
-          "category": "edge_case",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition for multiple users: the page content structure",
-              "data": "2+ concurrent sessions",
-              "expectedResult": "Multiple sessions established"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Simultaneously perform: assistive technology scans for landmarks",
-              "data": "Execute from multiple sessions at the same time",
-              "expectedResult": "No race conditions or data corruption"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify data integrity",
-              "data": "",
-              "expectedResult": "All operations complete correctly or fail gracefully with proper locking"
-            }
-          ],
-          "expectedResult": "System handles concurrent access without data corruption",
-          "labels": [
-            "edge-case",
-            "concurrency",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        },
-        {
-          "id": "tc-1784756197891-g9e1j",
-          "summary": "[Edge Case] Special characters in input",
-          "description": "Test with special characters, unicode, emojis, and extreme-length input.",
-          "preconditions": "Given the page content structure",
-          "category": "edge_case",
-          "priority": "low",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the page content structure",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with special input: assistive technology scans for landmarks",
-              "data": "Unicode: émojis 🎉, HTML: <script>alert(1)</script>, SQL: ' OR 1=1 --, Very long string (10000+ chars)",
-              "expectedResult": "Input is sanitized and processed or rejected safely"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Check for XSS, injection, or display issues",
-              "data": "",
-              "expectedResult": "No security vulnerabilities; content displayed/stored correctly"
-            }
-          ],
-          "expectedResult": "Special characters are handled safely",
-          "labels": [
-            "edge-case",
-            "special-chars",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        }
-      ],
-      "category": "edge_case"
-    },
-    {
-      "id": "ts-1784756197891-4ig14",
-      "name": "Functional Tests: all page content including headings, buttons, a...",
-      "description": "Verify end-to-end functional correctness",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-y5s2i",
-          "summary": "[Functional] Complete flow: all page content including headings, buttons, and interac...",
-          "description": "End-to-end functional test covering the full user journey.",
-          "preconditions": "Given the page content structure",
-          "category": "functional",
-          "priority": "critical",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Start from a clean state",
-              "data": "",
-              "expectedResult": "System is in initial state"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Establish preconditions: the page content structure",
-              "data": "Set up all required preconditions",
-              "expectedResult": "All preconditions are met"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Execute the main action: assistive technology scans for landmarks",
-              "data": "Use realistic, production-like data",
-              "expectedResult": "Action completes successfully"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify expected outcome: all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)",
-              "data": "",
-              "expectedResult": "all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)"
-            },
-            {
-              "stepNumber": 5,
-              "action": "Verify any side effects (notifications, logs, data changes)",
-              "data": "",
-              "expectedResult": "All expected side effects occurred correctly"
-            }
-          ],
-          "expectedResult": "all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)",
-          "labels": [
-            "functional",
-            "e2e",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        },
-        {
-          "id": "tc-1784756197891-orr6k",
-          "summary": "[Functional] State transition: assistive technology scans for landmarks",
-          "description": "Verify the system transitions correctly between states.",
-          "preconditions": "Given the page content structure",
-          "category": "functional",
-          "priority": "high",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Document the initial system state",
-              "data": "Record current state values",
-              "expectedResult": "Initial state recorded"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action: assistive technology scans for landmarks",
-              "data": "",
-              "expectedResult": "Action triggers state change"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify the new system state",
-              "data": "",
-              "expectedResult": "System transitioned to new state reflecting: all page content including headings, buttons, and interactive elements should be contained within appropriate landmarks (main, navigation, banner, contentinfo)"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify no unintended state changes occurred",
-              "data": "Check related entities remain unchanged",
-              "expectedResult": "Only the expected state changed"
-            }
-          ],
-          "expectedResult": "Clean state transition with no unintended side effects",
-          "labels": [
-            "functional",
-            "state-transition",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
+          "linkedCriterionId": "ac-1784757536194-njg5qdj"
         }
       ],
       "category": "functional"
     },
     {
-      "id": "ts-1784756197891-herm8",
-      "name": "Boundary Tests: all page content including headings, buttons, a...",
-      "description": "Verify behavior at value boundaries and limits",
+      "id": "ts-1784757536195-jsz73",
+      "name": "it should be contained within a <main> landmark region",
+      "description": "Happy path + failure + edge case for: it should be contained within a <main> landmark region",
       "testCases": [
         {
-          "id": "tc-1784756197891-9hsxs",
-          "summary": "[Boundary] Min/max values for: assistive technology scans for landmarks",
-          "description": "Test with minimum and maximum allowed values.",
-          "preconditions": "Given the page content structure",
-          "category": "boundary",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the page content structure",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with minimum valid value: assistive technology scans for landmarks",
-              "data": "Minimum allowed value (e.g., 1 char, 0, min date)",
-              "expectedResult": "System accepts minimum value"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Perform action with maximum valid value: assistive technology scans for landmarks",
-              "data": "Maximum allowed value (e.g., max length, max int, future date)",
-              "expectedResult": "System accepts maximum value"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Perform action with value just beyond maximum",
-              "data": "Max + 1, over length limit",
-              "expectedResult": "System rejects with appropriate error"
-            }
-          ],
-          "expectedResult": "Boundary values are handled correctly",
-          "labels": [
-            "boundary",
-            "min-max",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        },
-        {
-          "id": "tc-1784756197891-evtdt",
-          "summary": "[Boundary] Timeout/rate limit behavior",
-          "description": "Test system behavior at timeout boundaries and rate limits.",
-          "preconditions": "Given the page content structure",
-          "category": "boundary",
-          "priority": "low",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the page content structure",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Simulate slow network or processing near timeout threshold",
-              "data": "Add artificial delay close to timeout limit",
-              "expectedResult": "System completes before timeout OR times out gracefully"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Rapidly repeat the action to test rate limiting",
-              "data": "Execute 100+ times in quick succession",
-              "expectedResult": "Rate limiting activates; clear feedback provided"
-            }
-          ],
-          "expectedResult": "Timeouts and rate limits are handled gracefully",
-          "labels": [
-            "boundary",
-            "timeout",
-            "rate-limit",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        }
-      ],
-      "category": "boundary"
-    },
-    {
-      "id": "ts-1784756197891-m5vuh",
-      "name": "Error Handling Tests: all page content including headings, buttons, a...",
-      "description": "Verify proper error handling and system resilience",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-xwbk5",
-          "summary": "[Error Handling] Network failure during: assistive technology scans for landmarks",
-          "description": "Test system behavior when network connectivity is lost during the action.",
-          "preconditions": "Given the page content structure",
-          "category": "error_handling",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the page content structure",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Begin action: assistive technology scans for landmarks",
-              "data": "",
-              "expectedResult": "Action starts processing"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Simulate network disconnection during processing",
-              "data": "Drop network connection / simulate timeout",
-              "expectedResult": "System detects failure and shows appropriate error"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Restore network and verify system recovery",
-              "data": "",
-              "expectedResult": "System recovers gracefully; no data loss or corruption"
-            }
-          ],
-          "expectedResult": "System handles network failures without data loss",
-          "labels": [
-            "error-handling",
-            "network",
-            "resilience",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        },
-        {
-          "id": "tc-1784756197891-kf13m",
-          "summary": "[Error Handling] Downstream service failure",
-          "description": "Test behavior when a dependent service is unavailable.",
-          "preconditions": "Given the page content structure AND a dependent service is down",
-          "category": "error_handling",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the page content structure",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Make a dependent service unavailable (mock 500/503 responses)",
-              "data": "Simulate downstream service failure",
-              "expectedResult": "Dependent service is unreachable"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Attempt to perform: assistive technology scans for landmarks",
-              "data": "",
-              "expectedResult": "System handles dependency failure gracefully"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify user-facing error message",
-              "data": "",
-              "expectedResult": "Clear, non-technical error message displayed to user"
-            }
-          ],
-          "expectedResult": "Graceful degradation when dependencies fail",
-          "labels": [
-            "error-handling",
-            "dependency",
-            "resilience",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-yniv5yx"
-        }
-      ],
-      "category": "error_handling"
-    },
-    {
-      "id": "ts-1784756197891-np5z8",
-      "name": "Positive Tests: it should be contained within a <main> landmark...",
-      "description": "Verify the system behaves correctly under expected conditions",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-kca1i",
-          "summary": "[Positive] Verify: it should be contained within a <main> landmark region",
-          "description": "Validate that when the preconditions are met and the action is performed, the expected outcome occurs as specified.",
-          "preconditions": "Given the OEX course pages with heading elements",
+          "id": "tc-1784757536195-3jgy8",
+          "summary": "Verify: it should be contained within a <main> landmark region",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "the OEX course pages with heading elements",
           "category": "positive",
-          "priority": "high",
+          "priority": "critical",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Set up precondition: the OEX course pages with heading elements",
+              "action": "Setup: the OEX course pages with heading elements",
               "data": "",
-              "expectedResult": "System is in the expected initial state"
+              "expectedResult": "Precondition established"
             },
             {
               "stepNumber": 2,
-              "action": "Perform action: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Use valid, expected input data",
-              "expectedResult": "Action is accepted and processed"
+              "action": "Action: the h1 element \"OEX Native Problem Types\" is rendered",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
             },
             {
               "stepNumber": 3,
-              "action": "Verify the outcome",
+              "action": "Verify: it should be contained within a <main> landmark region",
               "data": "",
               "expectedResult": "it should be contained within a <main> landmark region"
             }
           ],
           "expectedResult": "it should be contained within a <main> landmark region",
           "labels": [
-            "positive",
-            "happy-path",
+            "critical-path",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
+          "linkedCriterionId": "ac-1784757536194-xiax1gj"
         },
         {
-          "id": "tc-1784756197891-mg6l2",
-          "summary": "[Positive] Verify repeated action: the h1 element \"OEX Native Problem Types\" is rendered",
-          "description": "Validate that the action can be performed multiple times with consistent results.",
-          "preconditions": "Given the OEX course pages with heading elements",
-          "category": "positive",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the OEX course pages with heading elements",
-              "data": "",
-              "expectedResult": "System is in the expected initial state"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action first time: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Valid input data",
-              "expectedResult": "it should be contained within a <main> landmark region"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Reset to initial state if applicable",
-              "data": "",
-              "expectedResult": "System returns to initial state"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Perform action second time: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Same valid input data",
-              "expectedResult": "Same result as first execution: it should be contained within a <main> landmark region"
-            }
-          ],
-          "expectedResult": "Consistent behavior across multiple executions",
-          "labels": [
-            "positive",
-            "repeatability",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        }
-      ],
-      "category": "positive"
-    },
-    {
-      "id": "ts-1784756197891-h6fzy",
-      "name": "Negative Tests: it should be contained within a <main> landmark...",
-      "description": "Verify the system handles invalid/unexpected conditions gracefully",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-6xptt",
-          "summary": "[Negative] Attempt action without precondition: the OEX course pages with heading elements",
-          "description": "Validate that the system handles the case when preconditions are NOT met.",
-          "preconditions": "Given the OEX course pages with heading elements is NOT satisfied",
+          "id": "tc-1784757536195-yf3ri",
+          "summary": "Negative: Render with missing or null data source",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "the OEX course pages with heading elements is NOT satisfied or input is invalid",
           "category": "negative",
           "priority": "high",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Ensure precondition is NOT met: Skip or invalidate \"the OEX course pages with heading elements\"",
-              "data": "",
-              "expectedResult": "System is NOT in the expected initial state"
+              "action": "Invalidate precondition or provide bad input for: the h1 element \"OEX Native Problem Types\" is rendered",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
             },
             {
               "stepNumber": 2,
-              "action": "Attempt to perform: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Valid input data but invalid precondition",
-              "expectedResult": "System prevents the action or shows appropriate error"
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
             },
             {
               "stepNumber": 3,
-              "action": "Verify error handling",
+              "action": "Verify no side effects (no data corruption, no partial state)",
               "data": "",
-              "expectedResult": "Appropriate error message is displayed; no data corruption occurs"
+              "expectedResult": "System unchanged, clear error to user"
             }
           ],
-          "expectedResult": "System gracefully handles missing preconditions",
+          "expectedResult": "Operation fails safely with clear feedback",
           "labels": [
-            "negative",
-            "precondition-failure",
+            "failure-mode",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
+          "linkedCriterionId": "ac-1784757536194-xiax1gj"
         },
         {
-          "id": "tc-1784756197891-h5slm",
-          "summary": "[Negative] Provide invalid input for: the h1 element \"OEX Native Problem Types\" is rendered",
-          "description": "Validate that the system correctly rejects invalid input data.",
-          "preconditions": "Given the OEX course pages with heading elements",
-          "category": "negative",
+          "id": "tc-1784757536195-vtswv",
+          "summary": "Edge: Render under slow network / partial DOM load",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "the OEX course pages with heading elements",
+          "category": "edge_case",
           "priority": "high",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Set up precondition: the OEX course pages with heading elements",
+              "action": "Setup: the OEX course pages with heading elements",
               "data": "",
-              "expectedResult": "System is in the expected initial state"
+              "expectedResult": "Ready"
             },
             {
               "stepNumber": 2,
-              "action": "Perform action with invalid data: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Invalid/malformed input (empty strings, wrong types, special characters)",
-              "expectedResult": "System rejects the input with a validation error"
+              "action": "Rapid navigation away and back during load",
+              "data": "Boundary values, null fields, rapid repetition",
+              "expectedResult": "System handles gracefully"
             },
             {
               "stepNumber": 3,
-              "action": "Verify no side effects occurred",
+              "action": "Verify system stability and data integrity",
               "data": "",
-              "expectedResult": "System state remains unchanged; no partial updates"
+              "expectedResult": "No crash, no corruption, recoverable state"
             }
           ],
-          "expectedResult": "Input validation prevents processing of invalid data",
-          "labels": [
-            "negative",
-            "invalid-input",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        },
-        {
-          "id": "tc-1784756197891-qymks",
-          "summary": "[Negative] Attempt action without proper authorization",
-          "description": "Validate that unauthorized users cannot perform the action.",
-          "preconditions": "User is NOT authorized or not logged in",
-          "category": "negative",
-          "priority": "high",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Ensure user is not authenticated or lacks required permissions",
-              "data": "Use unauthenticated session or low-privilege account",
-              "expectedResult": "User has insufficient permissions"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Attempt to perform: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "",
-              "expectedResult": "System denies access with 401/403 or appropriate error"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify no data was modified",
-              "data": "",
-              "expectedResult": "No changes were made to the system"
-            }
-          ],
-          "expectedResult": "Unauthorized access is properly blocked",
-          "labels": [
-            "negative",
-            "security",
-            "authorization",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        }
-      ],
-      "category": "negative"
-    },
-    {
-      "id": "ts-1784756197891-qxaol",
-      "name": "Edge Case Tests: it should be contained within a <main> landmark...",
-      "description": "Verify system behavior at boundaries and unusual conditions",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-8yif0",
-          "summary": "[Edge Case] Empty/null input for: the h1 element \"OEX Native Problem Types\" is rendered",
-          "description": "Test behavior when input is empty, null, or undefined.",
-          "preconditions": "Given the OEX course pages with heading elements",
-          "category": "edge_case",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the OEX course pages with heading elements",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with empty/null values: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "null, undefined, empty string \"\", empty array []",
-              "expectedResult": "System handles gracefully without crashing"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify system stability",
-              "data": "",
-              "expectedResult": "No unhandled exceptions; appropriate feedback provided"
-            }
-          ],
-          "expectedResult": "System handles empty/null input without failure",
+          "expectedResult": "System handles edge condition without failure",
           "labels": [
             "edge-case",
-            "null-handling",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        },
-        {
-          "id": "tc-1784756197891-lt1zp",
-          "summary": "[Edge Case] Concurrent execution: the h1 element \"OEX Native Problem Types\" is re...",
-          "description": "Test behavior when multiple users/processes perform the action simultaneously.",
-          "preconditions": "Given the OEX course pages with heading elements (multiple concurrent sessions)",
-          "category": "edge_case",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition for multiple users: the OEX course pages with heading elements",
-              "data": "2+ concurrent sessions",
-              "expectedResult": "Multiple sessions established"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Simultaneously perform: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Execute from multiple sessions at the same time",
-              "expectedResult": "No race conditions or data corruption"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify data integrity",
-              "data": "",
-              "expectedResult": "All operations complete correctly or fail gracefully with proper locking"
-            }
-          ],
-          "expectedResult": "System handles concurrent access without data corruption",
-          "labels": [
-            "edge-case",
-            "concurrency",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        },
-        {
-          "id": "tc-1784756197891-l2t50",
-          "summary": "[Edge Case] Special characters in input",
-          "description": "Test with special characters, unicode, emojis, and extreme-length input.",
-          "preconditions": "Given the OEX course pages with heading elements",
-          "category": "edge_case",
-          "priority": "low",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the OEX course pages with heading elements",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with special input: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Unicode: émojis 🎉, HTML: <script>alert(1)</script>, SQL: ' OR 1=1 --, Very long string (10000+ chars)",
-              "expectedResult": "Input is sanitized and processed or rejected safely"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Check for XSS, injection, or display issues",
-              "data": "",
-              "expectedResult": "No security vulnerabilities; content displayed/stored correctly"
-            }
-          ],
-          "expectedResult": "Special characters are handled safely",
-          "labels": [
-            "edge-case",
-            "special-chars",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        }
-      ],
-      "category": "edge_case"
-    },
-    {
-      "id": "ts-1784756197891-485cg",
-      "name": "Functional Tests: it should be contained within a <main> landmark...",
-      "description": "Verify end-to-end functional correctness",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-lm150",
-          "summary": "[Functional] Complete flow: it should be contained within a <main> landmark region",
-          "description": "End-to-end functional test covering the full user journey.",
-          "preconditions": "Given the OEX course pages with heading elements",
-          "category": "functional",
-          "priority": "critical",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Start from a clean state",
-              "data": "",
-              "expectedResult": "System is in initial state"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Establish preconditions: the OEX course pages with heading elements",
-              "data": "Set up all required preconditions",
-              "expectedResult": "All preconditions are met"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Execute the main action: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Use realistic, production-like data",
-              "expectedResult": "Action completes successfully"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify expected outcome: it should be contained within a <main> landmark region",
-              "data": "",
-              "expectedResult": "it should be contained within a <main> landmark region"
-            },
-            {
-              "stepNumber": 5,
-              "action": "Verify any side effects (notifications, logs, data changes)",
-              "data": "",
-              "expectedResult": "All expected side effects occurred correctly"
-            }
-          ],
-          "expectedResult": "it should be contained within a <main> landmark region",
-          "labels": [
-            "functional",
-            "e2e",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        },
-        {
-          "id": "tc-1784756197891-s2hv1",
-          "summary": "[Functional] State transition: the h1 element \"OEX Native Problem Types\" is rendered",
-          "description": "Verify the system transitions correctly between states.",
-          "preconditions": "Given the OEX course pages with heading elements",
-          "category": "functional",
-          "priority": "high",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Document the initial system state",
-              "data": "Record current state values",
-              "expectedResult": "Initial state recorded"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "",
-              "expectedResult": "Action triggers state change"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify the new system state",
-              "data": "",
-              "expectedResult": "System transitioned to new state reflecting: it should be contained within a <main> landmark region"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify no unintended state changes occurred",
-              "data": "Check related entities remain unchanged",
-              "expectedResult": "Only the expected state changed"
-            }
-          ],
-          "expectedResult": "Clean state transition with no unintended side effects",
-          "labels": [
-            "functional",
-            "state-transition",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
+          "linkedCriterionId": "ac-1784757536194-xiax1gj"
         }
       ],
       "category": "functional"
     },
     {
-      "id": "ts-1784756197891-1b9hs",
-      "name": "Boundary Tests: it should be contained within a <main> landmark...",
-      "description": "Verify behavior at value boundaries and limits",
+      "id": "ts-1784757536195-z32tv",
+      "name": "it should be inside a landmark region, not floating outside document structure",
+      "description": "Happy path + failure + edge case for: it should be inside a landmark region, not floating outside document structure",
       "testCases": [
         {
-          "id": "tc-1784756197891-a53nz",
-          "summary": "[Boundary] Min/max values for: the h1 element \"OEX Native Problem Types\" is rendered",
-          "description": "Test with minimum and maximum allowed values.",
-          "preconditions": "Given the OEX course pages with heading elements",
-          "category": "boundary",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the OEX course pages with heading elements",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with minimum valid value: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Minimum allowed value (e.g., 1 char, 0, min date)",
-              "expectedResult": "System accepts minimum value"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Perform action with maximum valid value: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "Maximum allowed value (e.g., max length, max int, future date)",
-              "expectedResult": "System accepts maximum value"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Perform action with value just beyond maximum",
-              "data": "Max + 1, over length limit",
-              "expectedResult": "System rejects with appropriate error"
-            }
-          ],
-          "expectedResult": "Boundary values are handled correctly",
-          "labels": [
-            "boundary",
-            "min-max",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        },
-        {
-          "id": "tc-1784756197891-8k8kf",
-          "summary": "[Boundary] Timeout/rate limit behavior",
-          "description": "Test system behavior at timeout boundaries and rate limits.",
-          "preconditions": "Given the OEX course pages with heading elements",
-          "category": "boundary",
-          "priority": "low",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the OEX course pages with heading elements",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Simulate slow network or processing near timeout threshold",
-              "data": "Add artificial delay close to timeout limit",
-              "expectedResult": "System completes before timeout OR times out gracefully"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Rapidly repeat the action to test rate limiting",
-              "data": "Execute 100+ times in quick succession",
-              "expectedResult": "Rate limiting activates; clear feedback provided"
-            }
-          ],
-          "expectedResult": "Timeouts and rate limits are handled gracefully",
-          "labels": [
-            "boundary",
-            "timeout",
-            "rate-limit",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        }
-      ],
-      "category": "boundary"
-    },
-    {
-      "id": "ts-1784756197891-9a1dj",
-      "name": "Error Handling Tests: it should be contained within a <main> landmark...",
-      "description": "Verify proper error handling and system resilience",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-hbelp",
-          "summary": "[Error Handling] Network failure during: the h1 element \"OEX Native Problem Types\" is re...",
-          "description": "Test system behavior when network connectivity is lost during the action.",
-          "preconditions": "Given the OEX course pages with heading elements",
-          "category": "error_handling",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the OEX course pages with heading elements",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Begin action: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "",
-              "expectedResult": "Action starts processing"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Simulate network disconnection during processing",
-              "data": "Drop network connection / simulate timeout",
-              "expectedResult": "System detects failure and shows appropriate error"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Restore network and verify system recovery",
-              "data": "",
-              "expectedResult": "System recovers gracefully; no data loss or corruption"
-            }
-          ],
-          "expectedResult": "System handles network failures without data loss",
-          "labels": [
-            "error-handling",
-            "network",
-            "resilience",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        },
-        {
-          "id": "tc-1784756197891-dps2s",
-          "summary": "[Error Handling] Downstream service failure",
-          "description": "Test behavior when a dependent service is unavailable.",
-          "preconditions": "Given the OEX course pages with heading elements AND a dependent service is down",
-          "category": "error_handling",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: the OEX course pages with heading elements",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Make a dependent service unavailable (mock 500/503 responses)",
-              "data": "Simulate downstream service failure",
-              "expectedResult": "Dependent service is unreachable"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Attempt to perform: the h1 element \"OEX Native Problem Types\" is rendered",
-              "data": "",
-              "expectedResult": "System handles dependency failure gracefully"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify user-facing error message",
-              "data": "",
-              "expectedResult": "Clear, non-technical error message displayed to user"
-            }
-          ],
-          "expectedResult": "Graceful degradation when dependencies fail",
-          "labels": [
-            "error-handling",
-            "dependency",
-            "resilience",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-ibhh1un"
-        }
-      ],
-      "category": "error_handling"
-    },
-    {
-      "id": "ts-1784756197891-z3rq2",
-      "name": "Positive Tests: it should be inside a landmark region, not floa...",
-      "description": "Verify the system behaves correctly under expected conditions",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-k1cmm",
-          "summary": "[Positive] Verify: it should be inside a landmark region, not floating outside document structure",
-          "description": "Validate that when the preconditions are met and the action is performed, the expected outcome occurs as specified.",
-          "preconditions": "Given any course page",
+          "id": "tc-1784757536195-0soom",
+          "summary": "Verify: it should be inside a landmark region, not floating outside document structure",
+          "description": "Confirm the expected behavior when all preconditions are met.",
+          "preconditions": "any course page",
           "category": "positive",
-          "priority": "high",
+          "priority": "critical",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Set up precondition: any course page",
+              "action": "Setup: any course page",
               "data": "",
-              "expectedResult": "System is in the expected initial state"
+              "expectedResult": "Precondition established"
             },
             {
               "stepNumber": 2,
-              "action": "Perform action: the sr-only h2 heading is rendered for screen readers",
-              "data": "Use valid, expected input data",
-              "expectedResult": "Action is accepted and processed"
+              "action": "Action: the sr-only h2 heading is rendered for screen readers",
+              "data": "Valid data",
+              "expectedResult": "Action accepted"
             },
             {
               "stepNumber": 3,
-              "action": "Verify the outcome",
+              "action": "Verify: it should be inside a landmark region, not floating outside document structure",
               "data": "",
               "expectedResult": "it should be inside a landmark region, not floating outside document structure"
             }
           ],
           "expectedResult": "it should be inside a landmark region, not floating outside document structure",
           "labels": [
-            "positive",
-            "happy-path",
+            "critical-path",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
+          "linkedCriterionId": "ac-1784757536194-tie5ulq"
         },
         {
-          "id": "tc-1784756197891-icioo",
-          "summary": "[Positive] Verify repeated action: the sr-only h2 heading is rendered for screen readers",
-          "description": "Validate that the action can be performed multiple times with consistent results.",
-          "preconditions": "Given any course page",
-          "category": "positive",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: any course page",
-              "data": "",
-              "expectedResult": "System is in the expected initial state"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action first time: the sr-only h2 heading is rendered for screen readers",
-              "data": "Valid input data",
-              "expectedResult": "it should be inside a landmark region, not floating outside document structure"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Reset to initial state if applicable",
-              "data": "",
-              "expectedResult": "System returns to initial state"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Perform action second time: the sr-only h2 heading is rendered for screen readers",
-              "data": "Same valid input data",
-              "expectedResult": "Same result as first execution: it should be inside a landmark region, not floating outside document structure"
-            }
-          ],
-          "expectedResult": "Consistent behavior across multiple executions",
-          "labels": [
-            "positive",
-            "repeatability",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        }
-      ],
-      "category": "positive"
-    },
-    {
-      "id": "ts-1784756197891-h8xm2",
-      "name": "Negative Tests: it should be inside a landmark region, not floa...",
-      "description": "Verify the system handles invalid/unexpected conditions gracefully",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-qh6n9",
-          "summary": "[Negative] Attempt action without precondition: any course page",
-          "description": "Validate that the system handles the case when preconditions are NOT met.",
-          "preconditions": "Given any course page is NOT satisfied",
+          "id": "tc-1784757536195-i2sgo",
+          "summary": "Negative: Render with missing or null data source",
+          "description": "Verify graceful handling when the primary failure condition occurs.",
+          "preconditions": "any course page is NOT satisfied or input is invalid",
           "category": "negative",
           "priority": "high",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Ensure precondition is NOT met: Skip or invalidate \"any course page\"",
-              "data": "",
-              "expectedResult": "System is NOT in the expected initial state"
+              "action": "Invalidate precondition or provide bad input for: the sr-only h2 heading is rendered for screen readers",
+              "data": "Invalid/missing data",
+              "expectedResult": "System in invalid state"
             },
             {
               "stepNumber": 2,
-              "action": "Attempt to perform: the sr-only h2 heading is rendered for screen readers",
-              "data": "Valid input data but invalid precondition",
-              "expectedResult": "System prevents the action or shows appropriate error"
+              "action": "Attempt the action",
+              "data": "",
+              "expectedResult": "Action blocked or error shown"
             },
             {
               "stepNumber": 3,
-              "action": "Verify error handling",
+              "action": "Verify no side effects (no data corruption, no partial state)",
               "data": "",
-              "expectedResult": "Appropriate error message is displayed; no data corruption occurs"
+              "expectedResult": "System unchanged, clear error to user"
             }
           ],
-          "expectedResult": "System gracefully handles missing preconditions",
+          "expectedResult": "Operation fails safely with clear feedback",
           "labels": [
-            "negative",
-            "precondition-failure",
+            "failure-mode",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
+          "linkedCriterionId": "ac-1784757536194-tie5ulq"
         },
         {
-          "id": "tc-1784756197891-9cpv7",
-          "summary": "[Negative] Provide invalid input for: the sr-only h2 heading is rendered for screen readers",
-          "description": "Validate that the system correctly rejects invalid input data.",
-          "preconditions": "Given any course page",
-          "category": "negative",
+          "id": "tc-1784757536195-h1d9k",
+          "summary": "Edge: Render under slow network / partial DOM load",
+          "description": "Test the boundary/edge condition most likely to cause issues in production.",
+          "preconditions": "any course page",
+          "category": "edge_case",
           "priority": "high",
           "steps": [
             {
               "stepNumber": 1,
-              "action": "Set up precondition: any course page",
+              "action": "Setup: any course page",
               "data": "",
-              "expectedResult": "System is in the expected initial state"
+              "expectedResult": "Ready"
             },
             {
               "stepNumber": 2,
-              "action": "Perform action with invalid data: the sr-only h2 heading is rendered for screen readers",
-              "data": "Invalid/malformed input (empty strings, wrong types, special characters)",
-              "expectedResult": "System rejects the input with a validation error"
+              "action": "Rapid navigation away and back during load",
+              "data": "Boundary values, null fields, rapid repetition",
+              "expectedResult": "System handles gracefully"
             },
             {
               "stepNumber": 3,
-              "action": "Verify no side effects occurred",
+              "action": "Verify system stability and data integrity",
               "data": "",
-              "expectedResult": "System state remains unchanged; no partial updates"
+              "expectedResult": "No crash, no corruption, recoverable state"
             }
           ],
-          "expectedResult": "Input validation prevents processing of invalid data",
-          "labels": [
-            "negative",
-            "invalid-input",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        },
-        {
-          "id": "tc-1784756197891-4esnw",
-          "summary": "[Negative] Attempt action without proper authorization",
-          "description": "Validate that unauthorized users cannot perform the action.",
-          "preconditions": "User is NOT authorized or not logged in",
-          "category": "negative",
-          "priority": "high",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Ensure user is not authenticated or lacks required permissions",
-              "data": "Use unauthenticated session or low-privilege account",
-              "expectedResult": "User has insufficient permissions"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Attempt to perform: the sr-only h2 heading is rendered for screen readers",
-              "data": "",
-              "expectedResult": "System denies access with 401/403 or appropriate error"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify no data was modified",
-              "data": "",
-              "expectedResult": "No changes were made to the system"
-            }
-          ],
-          "expectedResult": "Unauthorized access is properly blocked",
-          "labels": [
-            "negative",
-            "security",
-            "authorization",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        }
-      ],
-      "category": "negative"
-    },
-    {
-      "id": "ts-1784756197891-rbxc4",
-      "name": "Edge Case Tests: it should be inside a landmark region, not floa...",
-      "description": "Verify system behavior at boundaries and unusual conditions",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-8w78i",
-          "summary": "[Edge Case] Empty/null input for: the sr-only h2 heading is rendered for screen readers",
-          "description": "Test behavior when input is empty, null, or undefined.",
-          "preconditions": "Given any course page",
-          "category": "edge_case",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: any course page",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with empty/null values: the sr-only h2 heading is rendered for screen readers",
-              "data": "null, undefined, empty string \"\", empty array []",
-              "expectedResult": "System handles gracefully without crashing"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify system stability",
-              "data": "",
-              "expectedResult": "No unhandled exceptions; appropriate feedback provided"
-            }
-          ],
-          "expectedResult": "System handles empty/null input without failure",
+          "expectedResult": "System handles edge condition without failure",
           "labels": [
             "edge-case",
-            "null-handling",
             "ui"
           ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        },
-        {
-          "id": "tc-1784756197891-byvp8",
-          "summary": "[Edge Case] Concurrent execution: the sr-only h2 heading is rendered for screen r...",
-          "description": "Test behavior when multiple users/processes perform the action simultaneously.",
-          "preconditions": "Given any course page (multiple concurrent sessions)",
-          "category": "edge_case",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition for multiple users: any course page",
-              "data": "2+ concurrent sessions",
-              "expectedResult": "Multiple sessions established"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Simultaneously perform: the sr-only h2 heading is rendered for screen readers",
-              "data": "Execute from multiple sessions at the same time",
-              "expectedResult": "No race conditions or data corruption"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify data integrity",
-              "data": "",
-              "expectedResult": "All operations complete correctly or fail gracefully with proper locking"
-            }
-          ],
-          "expectedResult": "System handles concurrent access without data corruption",
-          "labels": [
-            "edge-case",
-            "concurrency",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        },
-        {
-          "id": "tc-1784756197891-xmln2",
-          "summary": "[Edge Case] Special characters in input",
-          "description": "Test with special characters, unicode, emojis, and extreme-length input.",
-          "preconditions": "Given any course page",
-          "category": "edge_case",
-          "priority": "low",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: any course page",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with special input: the sr-only h2 heading is rendered for screen readers",
-              "data": "Unicode: émojis 🎉, HTML: <script>alert(1)</script>, SQL: ' OR 1=1 --, Very long string (10000+ chars)",
-              "expectedResult": "Input is sanitized and processed or rejected safely"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Check for XSS, injection, or display issues",
-              "data": "",
-              "expectedResult": "No security vulnerabilities; content displayed/stored correctly"
-            }
-          ],
-          "expectedResult": "Special characters are handled safely",
-          "labels": [
-            "edge-case",
-            "special-chars",
-            "security",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        }
-      ],
-      "category": "edge_case"
-    },
-    {
-      "id": "ts-1784756197891-1ufzm",
-      "name": "Functional Tests: it should be inside a landmark region, not floa...",
-      "description": "Verify end-to-end functional correctness",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-eqrcv",
-          "summary": "[Functional] Complete flow: it should be inside a landmark region, not floating outsi...",
-          "description": "End-to-end functional test covering the full user journey.",
-          "preconditions": "Given any course page",
-          "category": "functional",
-          "priority": "critical",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Start from a clean state",
-              "data": "",
-              "expectedResult": "System is in initial state"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Establish preconditions: any course page",
-              "data": "Set up all required preconditions",
-              "expectedResult": "All preconditions are met"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Execute the main action: the sr-only h2 heading is rendered for screen readers",
-              "data": "Use realistic, production-like data",
-              "expectedResult": "Action completes successfully"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify expected outcome: it should be inside a landmark region, not floating outside document structure",
-              "data": "",
-              "expectedResult": "it should be inside a landmark region, not floating outside document structure"
-            },
-            {
-              "stepNumber": 5,
-              "action": "Verify any side effects (notifications, logs, data changes)",
-              "data": "",
-              "expectedResult": "All expected side effects occurred correctly"
-            }
-          ],
-          "expectedResult": "it should be inside a landmark region, not floating outside document structure",
-          "labels": [
-            "functional",
-            "e2e",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        },
-        {
-          "id": "tc-1784756197891-wcqd6",
-          "summary": "[Functional] State transition: the sr-only h2 heading is rendered for screen readers",
-          "description": "Verify the system transitions correctly between states.",
-          "preconditions": "Given any course page",
-          "category": "functional",
-          "priority": "high",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Document the initial system state",
-              "data": "Record current state values",
-              "expectedResult": "Initial state recorded"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action: the sr-only h2 heading is rendered for screen readers",
-              "data": "",
-              "expectedResult": "Action triggers state change"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Verify the new system state",
-              "data": "",
-              "expectedResult": "System transitioned to new state reflecting: it should be inside a landmark region, not floating outside document structure"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify no unintended state changes occurred",
-              "data": "Check related entities remain unchanged",
-              "expectedResult": "Only the expected state changed"
-            }
-          ],
-          "expectedResult": "Clean state transition with no unintended side effects",
-          "labels": [
-            "functional",
-            "state-transition",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
+          "linkedCriterionId": "ac-1784757536194-tie5ulq"
         }
       ],
       "category": "functional"
-    },
-    {
-      "id": "ts-1784756197891-mfueb",
-      "name": "Boundary Tests: it should be inside a landmark region, not floa...",
-      "description": "Verify behavior at value boundaries and limits",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-fj7y4",
-          "summary": "[Boundary] Min/max values for: the sr-only h2 heading is rendered for screen readers",
-          "description": "Test with minimum and maximum allowed values.",
-          "preconditions": "Given any course page",
-          "category": "boundary",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: any course page",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Perform action with minimum valid value: the sr-only h2 heading is rendered for screen readers",
-              "data": "Minimum allowed value (e.g., 1 char, 0, min date)",
-              "expectedResult": "System accepts minimum value"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Perform action with maximum valid value: the sr-only h2 heading is rendered for screen readers",
-              "data": "Maximum allowed value (e.g., max length, max int, future date)",
-              "expectedResult": "System accepts maximum value"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Perform action with value just beyond maximum",
-              "data": "Max + 1, over length limit",
-              "expectedResult": "System rejects with appropriate error"
-            }
-          ],
-          "expectedResult": "Boundary values are handled correctly",
-          "labels": [
-            "boundary",
-            "min-max",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        },
-        {
-          "id": "tc-1784756197891-mz0vm",
-          "summary": "[Boundary] Timeout/rate limit behavior",
-          "description": "Test system behavior at timeout boundaries and rate limits.",
-          "preconditions": "Given any course page",
-          "category": "boundary",
-          "priority": "low",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: any course page",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Simulate slow network or processing near timeout threshold",
-              "data": "Add artificial delay close to timeout limit",
-              "expectedResult": "System completes before timeout OR times out gracefully"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Rapidly repeat the action to test rate limiting",
-              "data": "Execute 100+ times in quick succession",
-              "expectedResult": "Rate limiting activates; clear feedback provided"
-            }
-          ],
-          "expectedResult": "Timeouts and rate limits are handled gracefully",
-          "labels": [
-            "boundary",
-            "timeout",
-            "rate-limit",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        }
-      ],
-      "category": "boundary"
-    },
-    {
-      "id": "ts-1784756197891-o6nqq",
-      "name": "Error Handling Tests: it should be inside a landmark region, not floa...",
-      "description": "Verify proper error handling and system resilience",
-      "testCases": [
-        {
-          "id": "tc-1784756197891-ihv49",
-          "summary": "[Error Handling] Network failure during: the sr-only h2 heading is rendered for screen r...",
-          "description": "Test system behavior when network connectivity is lost during the action.",
-          "preconditions": "Given any course page",
-          "category": "error_handling",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: any course page",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Begin action: the sr-only h2 heading is rendered for screen readers",
-              "data": "",
-              "expectedResult": "Action starts processing"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Simulate network disconnection during processing",
-              "data": "Drop network connection / simulate timeout",
-              "expectedResult": "System detects failure and shows appropriate error"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Restore network and verify system recovery",
-              "data": "",
-              "expectedResult": "System recovers gracefully; no data loss or corruption"
-            }
-          ],
-          "expectedResult": "System handles network failures without data loss",
-          "labels": [
-            "error-handling",
-            "network",
-            "resilience",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        },
-        {
-          "id": "tc-1784756197891-aurf9",
-          "summary": "[Error Handling] Downstream service failure",
-          "description": "Test behavior when a dependent service is unavailable.",
-          "preconditions": "Given any course page AND a dependent service is down",
-          "category": "error_handling",
-          "priority": "medium",
-          "steps": [
-            {
-              "stepNumber": 1,
-              "action": "Set up precondition: any course page",
-              "data": "",
-              "expectedResult": "System is ready"
-            },
-            {
-              "stepNumber": 2,
-              "action": "Make a dependent service unavailable (mock 500/503 responses)",
-              "data": "Simulate downstream service failure",
-              "expectedResult": "Dependent service is unreachable"
-            },
-            {
-              "stepNumber": 3,
-              "action": "Attempt to perform: the sr-only h2 heading is rendered for screen readers",
-              "data": "",
-              "expectedResult": "System handles dependency failure gracefully"
-            },
-            {
-              "stepNumber": 4,
-              "action": "Verify user-facing error message",
-              "data": "",
-              "expectedResult": "Clear, non-technical error message displayed to user"
-            }
-          ],
-          "expectedResult": "Graceful degradation when dependencies fail",
-          "labels": [
-            "error-handling",
-            "dependency",
-            "resilience",
-            "ui"
-          ],
-          "linkedCriterionId": "ac-1784756197889-rqacrhs"
-        }
-      ],
-      "category": "error_handling"
     }
   ],
   "summary": {
-    "totalScenarios": 24,
-    "totalTestCases": 56,
+    "totalScenarios": 4,
+    "totalTestCases": 12,
     "byCategory": {
-      "positive": 8,
-      "negative": 12,
-      "edge_case": 12,
-      "functional": 8,
-      "boundary": 8,
-      "error_handling": 8,
+      "positive": 4,
+      "negative": 4,
+      "edge_case": 4,
+      "functional": 0,
+      "boundary": 0,
+      "error_handling": 0,
       "security": 0,
       "performance": 0,
       "api": 0
     },
     "byPriority": {
       "critical": 4,
-      "high": 20,
-      "medium": 24,
-      "low": 8
+      "high": 8,
+      "medium": 0,
+      "low": 0
     }
   }
 }

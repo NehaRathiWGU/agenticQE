@@ -25,6 +25,8 @@ export interface ParsedAcceptanceCriteria {
     source: string;
     parsedAt: string;
     totalCriteria: number;
+    template?: string;
+    projectName?: string;
   };
 }
 
@@ -211,6 +213,26 @@ export interface AppConfig {
   xray: XrayCloudConfig;
   openaiApiKey?: string;
   openaiModel?: string;
+}
+
+/**
+ * Project-specific configuration
+ */
+export interface ProjectConfig {
+  name: string;
+  key: string;
+  description?: string;
+  jira: {
+    projectKey: string;
+    acceptanceCriteriaField?: string;
+  };
+  templates: Record<string, string>;
+  fieldMappings?: {
+    priority?: Record<string, string>;
+    categoryKeywords?: Record<string, string[]>;
+  };
+  environments?: string[];
+  defaultEnvironment?: string;
 }
 
 /**

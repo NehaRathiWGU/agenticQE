@@ -1,0 +1,31 @@
+{
+  "name": "Western Governors University",
+  "key": "wgu",
+  "description": "WGU internal projects configuration",
+  "jira": {
+    "projectKey": "ENG01",
+    "acceptanceCriteriaField": "customfield_10195"
+  },
+  "templates": {
+    "migration": "templates/migration.md",
+    "api-testing": "templates/api-testing.md",
+    "ui-testing": "templates/ui-testing.md",
+    "security": "templates/security.md"
+  },
+  "fieldMappings": {
+    "priority": {
+      "critical": "Highest",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "categoryKeywords": {
+      "api": ["api", "endpoint", "rest", "graphql", "http"],
+      "ui": ["ui", "frontend", "page", "button", "modal"],
+      "migration": ["migration", "migrate", "move", "deploy"],
+      "security": ["security", "auth", "permission", "role", "secure"]
+    }
+  },
+  "environments": ["SIT", "STAGE", "PROD"],
+  "defaultEnvironment": "SIT"
+}
